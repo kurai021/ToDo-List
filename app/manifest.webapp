@@ -1,0 +1,40 @@
+{
+  "version": "0.1",
+  "name": "TODO List",
+  "description": "TODO List with Alarm",
+  "launch_path": "/index.html",
+  "icons": {
+    "128": "/img/icon-128.png"
+  },
+  "developer": {
+    "name": "Richard Armuelles",
+    "url": "http://yourawesomeapp.com"
+  },
+  "locales": {
+    "es": {
+      "description": "TODO List con Alarma",
+      "developer": {
+        "url": "http://yourawesomeapp.com"
+      }
+    },
+    "it": {
+      "description": "Il vostro nuovo fantastico Open Web App",
+      "developer": {
+        "url": "http://yourawesomeapp.com"
+      }
+    }
+  },
+  "default_locale": "es",
+  "permissions": {
+    "desktop-notification" : {
+      "description": "Required to schedule notifications"
+    },
+    "alarms": {
+      "description": "Required to schedule alarms"
+    }
+  },
+  "messages": [
+    { "alarm": "/index.html" },
+    { "notification": "/index.html" }
+  ]
+}

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es" ng-app="TODO-list">
+<head>
+  <title>TODO-list</title>
+  <meta charset="utf-8">
+  <link href="/styles/gaiabb/all.css" rel="stylesheet" type="text/css">
+  <link href="/styles/main.css" rel="stylesheet" type="text/css">
+
+  <script src="components/jquery/dist/jquery.min.js"></script>
+</head>
+<body role="application" ng-controller="mainController">
+    <section class="skin-dark" role="region" ng-hide="showtasks()">
+        <header>
+            <h1>TODO List - Crear Tarea</h1>
+        </header>
+        <form id="task-form" action="index.html">
+            <p>
+                <input id="title" type="text" placeholder="Título de tarea" required="">
+                <button type="reset">Borrar</button>
+            </p>
+            <p>
+                <input id="deadline-hours" type="text" placeholder="Hora (hh)" required="">
+                <button type="reset">Borrar</button>
+            </p>
+            <p>
+                <input id="deadline-minutes" type="text" placeholder="Minutos (mm)" required="">
+                <button type="reset">Borrar</button>
+            </p>
+            <br>
+            <select name="" id="deadline-day" class="button">
+                <option value="">Selecciona el día</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+            </select>
+            <br>
+            <select name="" id="deadline-month" class="button">
+                <option value="">Selecciona el Mes</option>
+                <option value="Enero">Enero</option>
+                <option value="Febrero">Febrero</option>
+                <option value="Marzo">Marzo</option>
+                <option value="Abril">Abril</option>
+                <option value="Mayo">Mayo</option>
+                <option value="Junio">Junio</option>
+                <option value="Julio">Julio</option>
+                <option value="Agosto">Agosto</option>
+                <option value="Septiembre">Septiembre</option>
+                <option value="Octubre">Octubre</option>
+                <option value="Noviembre">Noviembre</option>
+                <option value="Diciembre">Diciembre</option>
+            </select>
+            <br>
+            <select name="" id="deadline-year" class="button">
+                <option value="">Selecciona el año</option>
+                <option value="2014">2014</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+            </select>
+            <br>
+            <button ng-click="showbutton()" type="submit" id="submit" class="recommend">Registrar Tarea</button>
+        </form>
+    </section>
+    
+    <section class="skin-dark" role="region" ng-show="showtasks()">
+        <header>
+            <a href="#" ng-click="hidebutton()"><span class="icon icon-back">back</span></a>
+            <h1>TODO List - Tareas</h1>
+        </header>
+        <div class="task-box">
+            <ul id="task-list"></ul>
+            <!--<button ng-click="hidebutton()">Ver Formulario</button>-->
+            <div id="toolbar">
+                <ul id="notifications"></ul>
+            </div>
+        </div>
+    </section>
+</body>
+    <script src="components/angular/angular.min.js"></script>
+    <script src="components/angular-route/angular-route.min.js"></script>
+    <script src="scripts/controller.js"></script>
+    <script defer src="/scripts/main.js"></script>
+</html>
