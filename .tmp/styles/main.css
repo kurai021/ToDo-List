@@ -1,1 +1,40 @@
-html{font-size:62.5%}body{margin:0;padding:0;font:1.6rem/2.2rem MozTT,sans-serif;color:#000}p{margin:1rem}form,.task-box{margin:1rem}
+/* line 1, ../../app/styles/main.sass */
+html {
+  font-size: 62.5%;
+}
+
+/* line 4, ../../app/styles/main.sass */
+body {
+  margin: 0;
+  padding: 0;
+  font: 1.6rem/2.2rem MozTT, sans-serif;
+  color: #000;
+}
+
+/* line 10, ../../app/styles/main.sass */
+p {
+  margin: 1rem;
+}
+
+/* line 13, ../../app/styles/main.sass */
+form, .task-box {
+  margin: 1rem;
+}
+
+/* line 16, ../../app/styles/main.sass */
+.icon-white {
+  color: white;
+}
+
+/* line 19, ../../app/styles/main.sass */
+[data-type="list"] li {
+  height: 10rem;
+}
+
+/* line 22, ../../app/styles/main.sass */
+section[role="region"] {
+  background-color: white;
+  height: 100%;
+}
+
+/*# sourceMappingURL=main.css.map */

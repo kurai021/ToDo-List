@@ -5,110 +5,149 @@
   <meta charset="utf-8">
   <link href="/styles/gaiabb/all.css" rel="stylesheet" type="text/css">
   <link href="/styles/main.css" rel="stylesheet" type="text/css">
-
+  <link rel="stylesheet" href="components/fontawesome/css/font-awesome.css">
   <script src="components/jquery/dist/jquery.min.js"></script>
 </head>
 <body role="application" ng-controller="mainController">
-    <section class="skin-dark" role="region" ng-hide="showtasks()">
-        <header>
-            <h1>TODO List - Crear Tarea</h1>
-        </header>
+
+<section data-type="sidebar" ng-hide="showtasks()">
+   <header>
+     <menu type="toolbar">
+         <a href="#content"><span class="icon icon-add">add</span></a>
+     </menu>
+     <h1>Sobre</h1>
+   </header>
+   <nav>
+     <ul>
+         <li><a href="#content">Inicio <i class="fa fa-home fa-1g fa-stack-1x"></i></a></li>
+         <li><a href="#help">Ayuda <i class="fa fa-question-circle fa-1g fa-stack-1x"></i></a></li>
+     </ul>
+     <h2>Contacto</h2>
+     <ul>
+         <li><a target="_blank" href="mailto:alexanderarmuelles@hotmail.com">Email <i class="fa fa-envelope fa-1g fa-stack-1x"></i></a></li>
+         <li><a target="_blank" href="https://www.facebook.com/richard.armuelles">Facebook <i class="fa fa-facebook fa-1g fa-stack-1x"></i></a></li>
+         <li><a target="_blank" href="https://twitter.com/raaztux">Twitter <i class="fa fa-twitter fa-1g fa-stack-1x"></i></a></li>
+         <li><a target="_blank" href="https://github.com/kurai021">Github <i class="fa fa-github fa-1g fa-stack-1x"></i></a></li>
+     </ul>
+    </nav>
+</section>
+
+<section id="drawer" class="skin-dark" role="region" ng-hide="showtasks()">
+    <header>
+        <a href="#content"><span class="icon icon-menu">hide sidebar</span></a>
+        <a href="#drawer"><span class="icon icon-menu">show sidebar</span></a>
+        <menu>
+            <a ng-click="showbutton()" href="#"><span class="fa fa-angle-right fa-2x icon-white"></span></a>
+        </menu>
+        <h1 data-l10n-id="MakeTask">TODO List - Crea una Tarea</h1>
+    </header>
+    <div role="main">
         <form id="task-form" action="index.html">
-            <p>
-                <input id="title" type="text" placeholder="Título de tarea" required="">
-                <button type="reset">Borrar</button>
-            </p>
-            <p>
-                <input id="deadline-hours" type="text" placeholder="Hora (hh)" required="">
-                <button type="reset">Borrar</button>
-            </p>
-            <p>
-                <input id="deadline-minutes" type="text" placeholder="Minutos (mm)" required="">
-                <button type="reset">Borrar</button>
-            </p>
-            <br>
-            <select name="" id="deadline-day" class="button">
-                <option value="">Selecciona el día</option>
-                <option value="01">01</option>
-                <option value="02">02</option>
-                <option value="03">03</option>
-                <option value="04">04</option>
-                <option value="05">05</option>
-                <option value="06">06</option>
-                <option value="07">07</option>
-                <option value="08">08</option>
-                <option value="09">09</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
-                <option value="21">21</option>
-                <option value="22">22</option>
-                <option value="23">23</option>
-                <option value="24">24</option>
-                <option value="25">25</option>
-                <option value="26">26</option>
-                <option value="27">27</option>
-                <option value="28">28</option>
-                <option value="29">29</option>
-                <option value="30">30</option>
-                <option value="31">31</option>
-            </select>
-            <br>
-            <select name="" id="deadline-month" class="button">
-                <option value="">Selecciona el Mes</option>
-                <option value="Enero">Enero</option>
-                <option value="Febrero">Febrero</option>
-                <option value="Marzo">Marzo</option>
-                <option value="Abril">Abril</option>
-                <option value="Mayo">Mayo</option>
-                <option value="Junio">Junio</option>
-                <option value="Julio">Julio</option>
-                <option value="Agosto">Agosto</option>
-                <option value="Septiembre">Septiembre</option>
-                <option value="Octubre">Octubre</option>
-                <option value="Noviembre">Noviembre</option>
-                <option value="Diciembre">Diciembre</option>
-            </select>
-            <br>
-            <select name="" id="deadline-year" class="button">
-                <option value="">Selecciona el año</option>
-                <option value="2014">2014</option>
-                <option value="2015">2015</option>
-                <option value="2016">2016</option>
-                <option value="2017">2017</option>
-                <option value="2018">2018</option>
-                <option value="2019">2019</option>
-                <option value="2020">2020</option>
-            </select>
-            <br>
-            <button ng-click="showbutton()" type="submit" id="submit" class="recommend">Registrar Tarea</button>
-        </form>
-    </section>
+        <p>
+            <input id="title" data-l10n-id="NameTask" type="text" placeholder="Descripción de tarea" required="">
+            <button data-l10n-id="DeleteBtn" type="reset">Borrar</button>
+        </p>
+        <p>
+            <input id="deadline-hours" data-l10n-id="HourTask" type="number" placeholder="Hora (HH)" required="">
+            <button data-l10n-id="DeleteBtn" type="reset">Borrar</button>
+        </p>
+        <p>
+            <input id="deadline-minutes" data-l10n-id="MinutesTask" type="number" placeholder="Minutos (mm)" required="">
+            <button data-l10n-id="DeleteBtn" type="reset">Borrar</button>
+        </p>
+        <br>
+        <select name="" id="deadline-day" class="button">
+            <option data-l10n-id="SelectDay" value="">Selecciona un Día</option>
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+            <option value="06">06</option>
+            <option value="07">07</option>
+            <option value="08">08</option>
+            <option value="09">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
+        </select>
+        <br>
+        <select name="" id="deadline-month" class="button">
+            <option data-l10n-id="SelectMonth" value="">Selecciona un Mes</option>
+            <option value="Enero" data-l10n-id="January">Enero</option>
+            <option value="Febrero" data-l10n-id="February">Febrero</option>
+            <option value="Marzo" data-l10n-id="March">Marzo</option>
+            <option value="Abril" data-l10n-id="April">Abril</option>
+            <option value="Mayo" data-l10n-id="May">Mayo</option>
+            <option value="Junio" data-l10n-id="June">Junio</option>
+            <option value="Julio" data-l10n-id="July">Julio</option>
+            <option value="Agosto" data-l10n-id="August">Agosto</option>
+            <option value="Septiembre" data-l10n-id="September">Septiembre</option>
+            <option value="Octubre" data-l10n-id="October">Octubre</option>
+            <option value="Noviembre" data-l10n-id="November">Noviembre</option>
+            <option value="Diciembre" data-l10n-id="December">Diciembre</option>
+        </select>
+        <br>
+        <select name="" id="deadline-year" class="button">
+            <option data-l10n-id="SelectYear" value="">Selecciona un Año</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+        </select>
+        <br>
+        <button ng-click="showbutton()" data-l10n-id="RegisterTask" type="submit" id="submit" class="recommend">Registrar Tarea</button>
+    </form>
+</div>
+</section>
+
+<section id="help" class="skin-dark" role="region" ng-hide="showtasks()">
+    <header>
+        <a href="#content"><span class="icon icon-menu">hide sidebar</span></a>
+        <a href="#drawer"><span class="icon icon-menu">show sidebar</span></a>
+        <h1>Prueba</h1>
+    </header>
+    <div role="main">
+        <h1>aloha</h1>
+    </div>
+</section>
     
-    <section class="skin-dark" role="region" ng-show="showtasks()">
-        <header>
-            <a href="#" ng-click="hidebutton()"><span class="icon icon-back">back</span></a>
-            <h1>TODO List - Tareas</h1>
-        </header>
-        <div class="task-box">
-            <ul id="task-list"></ul>
-            <!--<button ng-click="hidebutton()">Ver Formulario</button>-->
-            <div id="toolbar">
-                <ul id="notifications"></ul>
-            </div>
-        </div>
+<section class="skin-dark" role="region" ng-show="showtasks()">
+    <header>
+        <button ng-click="hidebutton()"><span class="fa fa-angle-left fa-2x icon-white"></span></button>
+        <h1 data-l10n-id="TaskList">TODO List - Lista de Tareas</h1>
+    </header>
+    <section data-type="list">
+        <ul id="task-list"></ul>
     </section>
+</section>
 </body>
     <script src="components/angular/angular.min.js"></script>
     <script src="components/angular-route/angular-route.min.js"></script>
     <script src="scripts/controller.js"></script>
     <script defer src="/scripts/main.js"></script>
+    <script defer src="scripts/l10n.js" charset="utf-8"></script>
+    <link rel="resource" type="application/l10n" href="locales/locales.ini" />
 </html>

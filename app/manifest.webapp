@@ -1,26 +1,29 @@
 {
-  "version": "0.1",
+  "version": "1.0",
   "name": "TODO List",
   "description": "TODO List with Alarm",
   "launch_path": "/index.html",
   "icons": {
-    "128": "/img/icon-128.png"
+    "128": "/icons/128x128.png",
+    "120": "/icons/120x120.png",
+    "90": "/icons/90x90.png",
+    "60": "/icons/60x60.png"
   },
   "developer": {
     "name": "Richard Armuelles",
-    "url": "http://yourawesomeapp.com"
+    "url": "https://github.com/kurai021/WAW4-IndexedDB-Alarmapi"
   },
   "locales": {
     "es": {
       "description": "TODO List con Alarma",
       "developer": {
-        "url": "http://yourawesomeapp.com"
+        "url": "https://github.com/kurai021/WAW4-IndexedDB-Alarmapi"
       }
     },
-    "it": {
-      "description": "Il vostro nuovo fantastico Open Web App",
+    "en": {
+      "description": "TODO List with Alarm",
       "developer": {
-        "url": "http://yourawesomeapp.com"
+        "url": "https://github.com/kurai021/WAW4-IndexedDB-Alarmapi"
       }
     }
   },
