@@ -34,7 +34,10 @@
     },
     "alarms": {
       "description": "Required to schedule alarms"
-    }
+    },
+    "audio-channel-alarm":{
+        "description": "Use the audio channel for hear a voice telling your current task"
+        }
   },
   "messages": [
     { "alarm": "/index.html" },

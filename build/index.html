@@ -1,34 +1,68 @@
 <!doctype html>
-<html lang="es" ng-app="TODO-list">
+<html lang="es">
 <head>
   <title>TODO-list</title>
   <meta charset="utf-8">
   <link href="/styles/gaiabb/all.css" rel="stylesheet" type="text/css">
   <link href="/styles/main.css" rel="stylesheet" type="text/css">
-
+  <link rel="stylesheet" href="components/fontawesome/css/font-awesome.css">
   <script src="components/jquery/dist/jquery.min.js"></script>
 </head>
-<body role="application" ng-controller="mainController">
-    <section class="skin-dark" role="region" ng-hide="showtasks()">
-        <header>
-            <h1>TODO List - Crear Tarea</h1>
+<body role="application">
+    <section id="index" data-position="current">
+        <section data-type="sidebar">
+           <header>
+             <menu type="toolbar">
+                 <a href="#"><span class="icon icon-add">add</span></a>
+             </menu>
+             <h1 data-l10n-id="Menu">Menú</h1>
+           </header>
+           <nav>
+             <ul>
+                 <li><a id="tohome" data-l10n-id="HomeBtn" href="#">Inicio<i class="fa fa-home fa-stack-1x"></i></a></li>
+                 <li><a id="tohelp" data-l10n-id="HelpBtn" href="#">Ayuda<i class="fa fa-question-circle fa-stack-1x"></i></a></li>
+             </ul>
+             <h2 data-l10n-id="Options">Sincronizar Cuentas</h2>
+             <ul>
+                 <li><a id="registerGoogle" data-l10n-id="RegisterGoogle">Google Calendar<i class="fa fa-google fa-stack-1x"></i></a></li>
+                 <li><a data-l10n-id="RegisterOutlook">Live Calendar<i class="fa fa-windows fa-stack-1x"></i></a></li>
+                 <!--<li><a data-l10n-id="RegisterCaldav">CalDAV<i class="fa fa-calendar fa-stack-1x"></i></a></li>-->
+             </ul>
+             <h2 data-l10n-id="Contact">Contactame</h2>
+             <ul>
+                 <li><a target="_blank" href="https://www.facebook.com/richard.armuelles">Facebook<i class="fa fa-facebook fa-stack-1x"></i></a></li>
+                 <li><a target="_blank" href="https://twitter.com/raaztux">Twitter<i class="fa fa-twitter fa-stack-1x"></i></a></li>
+                 <li><a target="_blank" href="https://github.com/kurai021">Github<i class="fa fa-github fa-stack-1x"></i></a></li>
+             </ul>
+        </nav>
+    </section>
+
+    <section id="drawer" class="skin-dark" role="region">
+        <header class="fixed">
+            <a href="#content"><span class="icon icon-menu">hide sidebar</span></a>
+            <a href="#drawer"><span class="icon icon-menu">show sidebar</span></a>
+            <menu>
+                <a id="totasklist" href="#"><span class="fa fa-angle-right fa-2x icon-white"></span></a>
+            </menu>
+            <h1 data-l10n-id="MakeTask">ToDo List - Crea una Tarea</h1>
         </header>
-        <form id="task-form" action="index.html">
+        <div role="main">
+            <form id="task-form" action="index.html">
             <p>
-                <input id="title" type="text" placeholder="Título de tarea" required="">
-                <button type="reset">Borrar</button>
+                <input id="title" data-l10n-id="NameTask" type="text" placeholder="Descripción de tarea" required="">
+                <button data-l10n-id="DeleteBtn" type="reset">Borrar</button>
             </p>
             <p>
-                <input id="deadline-hours" type="text" placeholder="Hora (hh)" required="">
-                <button type="reset">Borrar</button>
+                <input id="deadline-hours" data-l10n-id="HourTask" type="number" placeholder="Hora (HH)" required="">
+                <button data-l10n-id="DeleteBtn" type="reset">Borrar</button>
             </p>
             <p>
-                <input id="deadline-minutes" type="text" placeholder="Minutos (mm)" required="">
-                <button type="reset">Borrar</button>
+                <input id="deadline-minutes" data-l10n-id="MinutesTask" type="number" placeholder="Minutos (mm)" required="">
+                <button data-l10n-id="DeleteBtn" type="reset">Borrar</button>
             </p>
             <br>
             <select name="" id="deadline-day" class="button">
-                <option value="">Selecciona el día</option>
+                <option data-l10n-id="SelectDay" value="">Selecciona un Día</option>
                 <option value="01">01</option>
                 <option value="02">02</option>
                 <option value="03">03</option>
@@ -63,23 +97,23 @@
             </select>
             <br>
             <select name="" id="deadline-month" class="button">
-                <option value="">Selecciona el Mes</option>
-                <option value="Enero">Enero</option>
-                <option value="Febrero">Febrero</option>
-                <option value="Marzo">Marzo</option>
-                <option value="Abril">Abril</option>
-                <option value="Mayo">Mayo</option>
-                <option value="Junio">Junio</option>
-                <option value="Julio">Julio</option>
-                <option value="Agosto">Agosto</option>
-                <option value="Septiembre">Septiembre</option>
-                <option value="Octubre">Octubre</option>
-                <option value="Noviembre">Noviembre</option>
-                <option value="Diciembre">Diciembre</option>
+                <option data-l10n-id="SelectMonth" value="">Selecciona un Mes</option>
+                <option value="Enero" data-l10n-id="January">Enero</option>
+                <option value="Febrero" data-l10n-id="February">Febrero</option>
+                <option value="Marzo" data-l10n-id="March">Marzo</option>
+                <option value="Abril" data-l10n-id="April">Abril</option>
+                <option value="Mayo" data-l10n-id="May">Mayo</option>
+                <option value="Junio" data-l10n-id="June">Junio</option>
+                <option value="Julio" data-l10n-id="July">Julio</option>
+                <option value="Agosto" data-l10n-id="August">Agosto</option>
+                <option value="Septiembre" data-l10n-id="September">Septiembre</option>
+                <option value="Octubre" data-l10n-id="October">Octubre</option>
+                <option value="Noviembre" data-l10n-id="November">Noviembre</option>
+                <option value="Diciembre" data-l10n-id="December">Diciembre</option>
             </select>
             <br>
             <select name="" id="deadline-year" class="button">
-                <option value="">Selecciona el año</option>
+                <option data-l10n-id="SelectYear" value="">Selecciona un Año</option>
                 <option value="2014">2014</option>
                 <option value="2015">2015</option>
                 <option value="2016">2016</option>
@@ -89,26 +123,65 @@
                 <option value="2020">2020</option>
             </select>
             <br>
-            <button ng-click="showbutton()" type="submit" id="submit" class="recommend">Registrar Tarea</button>
+            <button data-l10n-id="RegisterTask" type="submit" id="submit" class="recommend">Registrar Tarea</button>
         </form>
-    </section>
-    
-    <section class="skin-dark" role="region" ng-show="showtasks()">
-        <header>
-            <a href="#" ng-click="hidebutton()"><span class="icon icon-back">back</span></a>
-            <h1>TODO List - Tareas</h1>
-        </header>
-        <div class="task-box">
-            <ul id="task-list"></ul>
-            <!--<button ng-click="hidebutton()">Ver Formulario</button>-->
-            <div id="toolbar">
-                <ul id="notifications"></ul>
-            </div>
         </div>
     </section>
+</section>
+
+<section id="googlecalendar-section" class="notvisible">
+        <form id="googlecalendar" action="" role="dialog" data-type="object">
+            <header>Google Calendar</header>
+            <section>
+              <p>
+                  <input type="text" placeholder="Email" required>
+                  <button data-l10n-id="DeleteBtn" type="reset">Borrar</button>
+              </p>
+              <p>
+                  <input type="password" placeholder="Password" required>
+                  <button data-l10n-id="DeleteBtn" type="reset">Borrar</button>
+              </p>
+            </section>
+            <menu type="toolbar">
+                <button id="id" class="full">Aceptar</button>
+                <button disabled>Desvincular</button>
+                <button id="cancelgoogle" class="full">Cancelar</button>
+            </menu>
+        </form>
+    </section>
+
+<section id="aboutapp" class="skin-dark" role="region" data-position="left">
+    <header class="fixed">
+        <a href="#content"><span class="icon icon-menu">hide sidebar</span></a>
+        <a href="#drawer"><span class="icon icon-menu">show sidebar</span></a>
+        <h1>Sobre ToDo List</h1>
+    </header>
+    <div class="text-center" role="main">
+        <img class="img-logo-about" src="icons/90x90.png" alt="ToDo-List icon">
+        <h1>ToDo List</h1>
+        <em>1.0</em>
+        <p data-l10n-id="about-text1">Aplicación para crear lista de tareas con alarma para recordarte cuando debes realizarlas</p>
+        <em data-l10n-id="about-text2">Este software está licenciado bajo la:
+            <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">
+                <img class="apache-icon" src="icons/apache.png" alt="apache-license">
+                <p>Apache License 2.0</p>
+            </a>
+        </em> 
+    </div>
+</section>
+    
+<section id="tasklist" class="skin-dark" role="region" data-position="right">
+    <header>
+        <button id="toindex"><span class="fa fa-angle-left fa-2x icon-white"></span></button>
+        <h1 data-l10n-id="TaskList">ToDo List - Lista de Tareas</h1>
+    </header>
+    <section data-type="list">
+        <ul id="task-list"></ul>
+    </section>
+</section>
 </body>
-    <script src="components/angular/angular.min.js"></script>
-    <script src="components/angular-route/angular-route.min.js"></script>
-    <script src="scripts/controller.js"></script>
-    <script defer src="/scripts/main.js"></script>
+    <script defer src="scripts/main.js"></script>
+    <script defer src="scripts/reopen.js"></script>
+    <script defer src="scripts/l10n.js" charset="utf-8"></script>
+    <link rel="resource" type="application/l10n" href="locales/locales.ini" />
 </html>

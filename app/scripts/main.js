@@ -1,3 +1,48 @@
+// Drawer Building Blocks control
+
+document.querySelector('#tohelp').addEventListener ('click', function() {
+    document.querySelector('#aboutapp').className = 'current';
+    document.querySelector('#aboutapp').className = 'skin-dark';
+    document.querySelector('#aboutapp').setAttribute('data-position', 'current');
+    document.querySelector('#index').setAttribute('data-position', 'right');
+    document.querySelector('#tasklist').setAttribute('data-position', 'left');
+});
+
+document.querySelector('#tohome').addEventListener ('click', function() {
+    document.querySelector('#aboutapp').className = 'left';
+    document.querySelector('#aboutapp').className = 'skin-dark';
+    document.querySelector('#aboutapp').setAttribute('data-position', 'left');
+    document.querySelector('#index').setAttribute('data-position', 'current');
+    document.querySelector('#tasklist').setAttribute('data-position', 'right');
+});
+
+// Change views
+document.querySelector('#totasklist').addEventListener ('click', function() {
+    document.querySelector('#tasklist').className = 'current';
+    document.querySelector('#tasklist').className = 'skin-dark';
+    document.querySelector('#tasklist').setAttribute('data-position', 'current');
+    document.querySelector('#index').setAttribute('data-position', 'right');
+    document.querySelector('#aboutapp').setAttribute('data-position', 'right');
+});
+
+document.querySelector('#toindex').addEventListener ('click', function() {
+    document.querySelector('#tasklist').className = 'right';
+    document.querySelector('#tasklist').className = 'skin-dark';
+    document.querySelector('#tasklist').setAttribute('data-position', 'right');
+    document.querySelector('#index').setAttribute('data-position', 'current');
+    document.querySelector('#aboutapp').setAttribute('data-position', 'left');
+});
+
+//Google Calendar, Live Calendar and CalDAV support
+document.querySelector('#registerGoogle').addEventListener ('click', function() {
+    document.querySelector('#googlecalendar-section').setAttribute('class', 'visible');
+});
+
+document.querySelector('#cancelgoogle').addEventListener ('click', function() {
+    document.querySelector('#googlecalendar-section').setAttribute('class', 'notvisible');
+});
+
+
 // create an instance of a db object for us to store the IDB data in
 var db;
 
@@ -21,14 +66,15 @@ var year = document.getElementById('deadline-year');
 var submit = document.getElementById('submit');
 
 window.onload = function() {
+    
     console.log(("AppIni"));
-  // In the following line, you should include the prefixes of implementations you want to test.
-  window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
-  // DON'T use "var indexedDB = ..." if you're not in a function.
-  // Moreover, you may need references to some window.IDB* objects:
-  window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
-  window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
-  // (Mozilla has never prefixed these objects, so we don't need window.mozIDB*)
+    // In the following line, you should include the prefixes of implementations you want to test.
+    window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+    // DON'T use "var indexedDB = ..." if you're not in a function.
+    // Moreover, you may need references to some window.IDB* objects:
+    window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
+    window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
+    // (Mozilla has never prefixed these objects, so we don't need window.mozIDB*)
 
 
   // Let us open our database
@@ -188,7 +234,7 @@ window.onload = function() {
           }
 
           // The "ignoreTimezone" string makes the alarm ignore timezones and always go off at the same time wherever you are
-          var request = navigator.mozAlarms.add(myAlarmDate, "ignoreTimezone", data);
+          var request = navigator.mozAlarms.add(myAlarmDate, "ignoreTimezone", {type: 'yolo'} + data);
 
           request.onsuccess = function () {
             console.log(("AlarmActivated"));
@@ -197,15 +243,30 @@ window.onload = function() {
           request.onerror = function () { 
             console.log(("ErrorOcurred") + " " + this.error.name);
           };
+            
+            
+            /*navigator.mozSetMessageHandler('alarm', function() {
+                console.log('alarm');
+                launchSelf();
+            });
+
+            function launchSelf() {
+                var request = window.navigator.mozApps.getSelf();
+                request.onsuccess = function() {
+                    if (request.result) {
+                        request.result.launch();
+                    }
+                };
+            }*/
 
           
-          // clear the form, ready for adding the next entry
-          title.value = '';
-          hours.value = null;
-          minutes.value = null;
-          day.value = 01;
-          month.value = 'January';
-          year.value = 2020;
+            // clear the form, ready for adding the next entry
+            title.value = '';
+            hours.value = null;
+            minutes.value = null;
+            day.value = 01;
+            month.value = 'January';
+            year.value = 2020;
           
         };
          
@@ -307,13 +368,17 @@ window.onload = function() {
             createNotification(cursor.value.taskTitle);
           }
           
-          // move on and perform the same deadline check on the next cursor item
-          cursor.continue();
+            // move on and perform the same deadline check on the next cursor item
+            cursor.continue();
         }      
     }
   }
+    
     // function for creating the notification
     function createNotification(title) {
+        var audio = new Audio('http://translate.google.com/translate_tts?tl=' + navigator.mozL10n.language.code + '&q=' + navigator.mozL10n.get("HourOf") + title);
+        audio.mozAudioChannelType = 'alarm';
+        audio.volume.alarm = 15;
         
         // Let's check if the browser supports notifications
         if (!"Notification" in window) {
@@ -326,6 +391,7 @@ window.onload = function() {
             var text = navigator.mozL10n.get("HourOf") + " " + '"' + title + '"';
             var notification = new Notification('To do list', { body: text, icon: img });
             window.navigator.vibrate(2000);
+            audio.play();
         }
         // Otherwise, we need to ask the user for permission
         // Note, Chrome does not implement the permission static property
@@ -342,6 +408,7 @@ window.onload = function() {
                     var text = navigator.mozL10n.get("HourOf") + " " + '"' + title + '"';
                     var notification = new Notification('To do list', { body: text, icon: img });
                     window.navigator.vibrate(2000);
+                    audio.play();
                 }
             });
         }

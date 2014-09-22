@@ -1,6 +1,47 @@
-// create a reference to the notifications list in the bottom of the app; we will write database messages into this list by
-//appending list items on to the inner HTML of this variable - this is all the lines that say note.innerHTML += '<li>foo</li>';
-var note = document.getElementById('notifications');
+// Drawer Building Blocks control
+
+document.querySelector('#tohelp').addEventListener ('click', function() {
+    document.querySelector('#aboutapp').className = 'current';
+    document.querySelector('#aboutapp').className = 'skin-dark';
+    document.querySelector('#aboutapp').setAttribute('data-position', 'current');
+    document.querySelector('#index').setAttribute('data-position', 'right');
+    document.querySelector('#tasklist').setAttribute('data-position', 'left');
+});
+
+document.querySelector('#tohome').addEventListener ('click', function() {
+    document.querySelector('#aboutapp').className = 'left';
+    document.querySelector('#aboutapp').className = 'skin-dark';
+    document.querySelector('#aboutapp').setAttribute('data-position', 'left');
+    document.querySelector('#index').setAttribute('data-position', 'current');
+    document.querySelector('#tasklist').setAttribute('data-position', 'right');
+});
+
+// Change views
+document.querySelector('#totasklist').addEventListener ('click', function() {
+    document.querySelector('#tasklist').className = 'current';
+    document.querySelector('#tasklist').className = 'skin-dark';
+    document.querySelector('#tasklist').setAttribute('data-position', 'current');
+    document.querySelector('#index').setAttribute('data-position', 'right');
+    document.querySelector('#aboutapp').setAttribute('data-position', 'right');
+});
+
+document.querySelector('#toindex').addEventListener ('click', function() {
+    document.querySelector('#tasklist').className = 'right';
+    document.querySelector('#tasklist').className = 'skin-dark';
+    document.querySelector('#tasklist').setAttribute('data-position', 'right');
+    document.querySelector('#index').setAttribute('data-position', 'current');
+    document.querySelector('#aboutapp').setAttribute('data-position', 'left');
+});
+
+//Google Calendar, Live Calendar and CalDAV support
+document.querySelector('#registerGoogle').addEventListener ('click', function() {
+    document.querySelector('#googlecalendar-section').setAttribute('class', 'visible');
+});
+
+document.querySelector('#cancelgoogle').addEventListener ('click', function() {
+    document.querySelector('#googlecalendar-section').setAttribute('class', 'notvisible');
+});
+
 
 // create an instance of a db object for us to store the IDB data in
 var db;
@@ -25,14 +66,15 @@ var year = document.getElementById('deadline-year');
 var submit = document.getElementById('submit');
 
 window.onload = function() {
-  note.innerHTML += '<li>App inicializada.</li>';
-  // In the following line, you should include the prefixes of implementations you want to test.
-  window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
-  // DON'T use "var indexedDB = ..." if you're not in a function.
-  // Moreover, you may need references to some window.IDB* objects:
-  window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
-  window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
-  // (Mozilla has never prefixed these objects, so we don't need window.mozIDB*)
+    
+    console.log(("AppIni"));
+    // In the following line, you should include the prefixes of implementations you want to test.
+    window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+    // DON'T use "var indexedDB = ..." if you're not in a function.
+    // Moreover, you may need references to some window.IDB* objects:
+    window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
+    window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
+    // (Mozilla has never prefixed these objects, so we don't need window.mozIDB*)
 
 
   // Let us open our database
@@ -43,11 +85,11 @@ window.onload = function() {
 
   // these two event handlers act on the database being opened successfully, or not
   request.onerror = function(event) {
-    note.innerHTML += '<li>Error cargando base de datos.</li>';
+    console.log(("ErrorLoBD"));
   };
   
   request.onsuccess = function(event) {
-    note.innerHTML += '<li>Base de datos inicializada.</li>';
+      console.log(("SuccessLoBD"));
     
     // store the result of opening the database in the db variable. This is used a lot below
     db = request.result;
@@ -64,7 +106,7 @@ window.onload = function() {
     var db = event.target.result;
     
     db.onerror = function(event) {
-      note.innerHTML += '<li>Error loading database.</li>';
+      consoloe.log(navigator.mozL10n.get("ErrorLoBD"));
     };
 
     // Create an objectStore for this database
@@ -81,7 +123,7 @@ window.onload = function() {
 
     objectStore.createIndex("notified", "notified", { unique: false });
     
-    note.innerHTML += '<li>Almacenamiento de objetos creado.</li>';
+    console.log(("ObjectStorage"));
   };
     
   function displayData() {
@@ -97,20 +139,20 @@ window.onload = function() {
         if(cursor) {
           // create a list item to put each data item inside when displaying it
           var listItem = document.createElement('li');
-          
-          // check which suffix the deadline day of the month needs
-          if(cursor.value.day == 1 || cursor.value.day == 21 || cursor.value.day == 31) {
-            daySuffix = "st";
-          } else if(cursor.value.day == 2 || cursor.value.day == 22) {
-            daySuffix = "nd";
-          } else if(cursor.value.day == 3 || cursor.value.day == 23) {
-            daySuffix = "rd";
-          } else {
-            daySuffix = "th";  
-          }
+
+            // check which suffix the deadline day of the month needs
+            if(cursor.value.day == 1 || cursor.value.day == 21 || cursor.value.day == 31) {
+                daySuffix = "st";
+            } else if(cursor.value.day == 2 || cursor.value.day == 22) {
+                daySuffix = "nd";
+            } else if(cursor.value.day == 3 || cursor.value.day == 23) {
+                daySuffix = "rd";
+            } else {
+                daySuffix = "th";  
+            }
           
           // build the to-do list entry and put it into the list item via innerHTML.
-          listItem.innerHTML = cursor.value.taskTitle + ' — ' + cursor.value.hours + ':' + cursor.value.minutes + ', ' + cursor.value.month + ' ' + cursor.value.day + daySuffix + ' ' + cursor.value.year + '.';
+          listItem.innerHTML = '<p>' + cursor.value.taskTitle + '</p>' + '<p>' + cursor.value.hours + ':' + cursor.value.minutes + ', ' + cursor.value.month + ' ' + cursor.value.day + daySuffix + ' ' + cursor.value.year + '.' + '</p>';
           
           if(cursor.value.notified == "yes") {
             listItem.style.textDecoration = "line-through";
@@ -124,9 +166,11 @@ window.onload = function() {
           // function when clicked
           var deleteButton = document.createElement('button');
           listItem.appendChild(deleteButton);
-          deleteButton.innerHTML = 'X';
-          // here we are setting a data attribute on our delete button to say what task we want deleted if it is clicked! 
+          // here we are setting a data attribute on our delete button to say what task we want deleted if it is clicked!
+          deleteButton.innerHTML = "Borrar";
           deleteButton.setAttribute('data-task', cursor.value.taskTitle);
+          deleteButton.setAttribute('class', 'danger');
+          deleteButton.setAttribute('data-l10n-id', 'DeleteBtn');
           deleteButton.onclick = function(event) {
             deleteItem(event);
           }
@@ -136,7 +180,7 @@ window.onload = function() {
         
         // if there are no more cursor items to iterate through, say so, and exit the function 
         } else {
-          note.innerHTML += '<li>Todas las entradas mostradas.</li>';
+            console.log(("AllEntries"));
         }
       }
     }
@@ -151,7 +195,7 @@ window.onload = function() {
     // Stop the form submitting if any values are left empty. This is just for browsers that don't support the HTML5 form
     // required attributes
     if(title.value == '' || hours.value == null || minutes.value == null || day.value == '' || month.value == '' || year.value == null) {
-      note.innerHTML += '<li>Datos no agregados — forma no completada.</li>';
+      window.alert(navigator.mozL10n.get("DataEForm"));
       return;
     } else {
       
@@ -165,11 +209,11 @@ window.onload = function() {
     
       // report on the success of opening the transaction
       transaction.oncomplete = function(event) {
-        note.innerHTML += '<li>Transaccion abierta para agregar Tarea.</li>';
+          console.log(("TransactOpen"));
       };
 
       transaction.onerror = function(event) {
-        note.innerHTML += '<li>Transaccion no completada. No se permite duplicar objetos.</li>';
+          window.alert(("DuplicateData"));
       };
 
       // call an object store that's already been added to the database
@@ -179,7 +223,7 @@ window.onload = function() {
         request.onsuccess = function(event) {
           
           // report the success of our new item going into the database
-          note.innerHTML += '<li>Nuevo item agregado a la base de datos.</li>';
+            window.alert(navigator.mozL10n.get("NewTaskM"));
 
           //build a date object out of the user-provided time and date information from the form submission
           var myAlarmDate  = new Date(month.value + " " + day.value + ", " + year.value + " " + hours.value + ":" + minutes.value + ":00");
@@ -190,24 +234,39 @@ window.onload = function() {
           }
 
           // The "ignoreTimezone" string makes the alarm ignore timezones and always go off at the same time wherever you are
-          var request = navigator.mozAlarms.add(myAlarmDate, "ignoreTimezone", data);
+          var request = navigator.mozAlarms.add(myAlarmDate, "ignoreTimezone", {type: 'yolo'} + data);
 
           request.onsuccess = function () {
-            console.log("Alarma activada");
+            console.log(("AlarmActivated"));
           };
 
           request.onerror = function () { 
-            console.log("Error ocurrido: " + this.error.name);
+            console.log(("ErrorOcurred") + " " + this.error.name);
           };
+            
+            
+            /*navigator.mozSetMessageHandler('alarm', function() {
+                console.log('alarm');
+                launchSelf();
+            });
+
+            function launchSelf() {
+                var request = window.navigator.mozApps.getSelf();
+                request.onsuccess = function() {
+                    if (request.result) {
+                        request.result.launch();
+                    }
+                };
+            }*/
 
           
-          // clear the form, ready for adding the next entry
-          title.value = '';
-          hours.value = null;
-          minutes.value = null;
-          day.value = 01;
-          month.value = 'January';
-          year.value = 2020;
+            // clear the form, ready for adding the next entry
+            title.value = '';
+            hours.value = null;
+            minutes.value = null;
+            day.value = 01;
+            month.value = 'January';
+            year.value = 2020;
           
         };
          
@@ -229,7 +288,7 @@ window.onload = function() {
     
     // report that the data item has been deleted
     request.onsuccess = function(event) {
-      note.innerHTML += '<li>Tarea \"' + dataTask + '\" borrada.</li>';
+        window.alert(navigator.mozL10n.get("TaskDel1") + " " + dataTask + " " + navigator.mozL10n.get("TaskDel2"));
     };
     
   }
@@ -257,46 +316,47 @@ window.onload = function() {
         
         // convert the month names we have installed in the IDB into a month number that JavaScript will understand. 
         // The JavaScript date object creates month values as a number between 0 and 11.
-        switch(cursor.value.month) {
-          case "Enero":
-            var monthNumber = 0;
-            break;
-          case "Febrero":
-            var monthNumber = 1;
-            break;
-          case "Marzo":
-            var monthNumber = 2;
-            break;
-          case "Abril":
-            var monthNumber = 3;
-            break;
-          case "Mayo":
-            var monthNumber = 4;
-            break;
-          case "Junio":
-            var monthNumber = 5;
-            break;
-          case "Julio":
-            var monthNumber = 6;
-            break;
-          case "Agosto":
-            var monthNumber = 7;
-            break;
-          case "Septiembre":
-            var monthNumber = 8;
-            break;
-          case "Octubre":
-            var monthNumber = 9;
-            break;
-          case "Noviembre":
-            var monthNumber = 10;
-            break;
-          case "Diciembre":
-            var monthNumber = 11;
-            break;
-          default:
-          alert('Mes incorrecto agregado.');
+        
+        if(cursor.value.month == "January" || cursor.value.month == "Enero"){
+            var monthNumber = 0
         }
+        else if(cursor.value.month == "February" || cursor.value.month == "Febrero"){
+            var monthNumber = 1
+        }
+        else if(cursor.value.month == "March" || cursor.value.month == "Marzo"){
+            var monthNumber = 2
+        }
+        else if(cursor.value.month == "April" || cursor.value.month == "Abril"){
+            var monthNumber = 3
+        }
+        else if(cursor.value.month == "May" || cursor.value.month == "Mayo"){
+            var monthNumber = 4
+        }
+        else if(cursor.value.month == "June" || cursor.value.month == "Junio"){
+            var monthNumber = 5
+        }
+        else if(cursor.value.month == "July" || cursor.value.month == "Julio"){
+            var monthNumber = 6
+        }
+        else if(cursor.value.month == "August" || cursor.value.month == "Agosto"){
+            var monthNumber = 7
+        }
+        else if(cursor.value.month == "September" || cursor.value.month == "Septiembre"){
+            var monthNumber = 8
+        }
+        else if(cursor.value.month == "October" || cursor.value.month == "Octubre"){
+            var monthNumber = 9
+        }
+        else if(cursor.value.month == "November" || cursor.value.month == "Noviembre"){
+            var monthNumber = 10
+        }
+        else if(cursor.value.month == "December" || cursor.value.month == "Diciembre"){
+            var monthNumber = 11
+        }
+        else{
+            alert(navigator.mozL10n.get("IncorrectMonth"));
+        }
+            
           // check if the current hours, minutes, day, month and year values match the stored values for each task in the IDB.
           // The + operator in this case converts numbers with leading zeros into their non leading zero equivalents, so e.g.
           // 09 -> 9. This is needed because JS date number values never have leading zeros, but our data might.
@@ -305,46 +365,74 @@ window.onload = function() {
           if(+(cursor.value.hours) == hourCheck && +(cursor.value.minutes) == minuteCheck && +(cursor.value.day) == dayCheck && monthNumber == monthCheck && cursor.value.year == yearCheck && cursor.value.notified == "no") {
             
             // If the numbers all do match, run the createNotification() function to create a system notification
-            updateNotified(cursor.value.taskTitle);
+            createNotification(cursor.value.taskTitle);
           }
           
-          // move on and perform the same deadline check on the next cursor item
-          cursor.continue();
-        }
-        
+            // move on and perform the same deadline check on the next cursor item
+            cursor.continue();
+        }      
     }
+  }
     
-  }
-  
-  // function for creating the notification
-  function updateNotified(title) {
-
-    // Here we need to update the value of notified to "yes" in this particular data object, so the
-    // notification won't be set off on it again
-
-    // first open up a transaction as usual
-    var objectStore = db.transaction(['toDoList'], "readwrite").objectStore('toDoList');
-
-    // get the to-do list object that has this title as it's title
-    var request = objectStore.get(title);
-
-    request.onsuccess = function() {
-      // grab the data object returned as the result
-      var data = request.result;
-      
-      // update the notified value in the object to "yes"
-      data.notified = "yes";
-      
-      // create another request that inserts the item back into the database
-      var requestUpdate = objectStore.put(data);
-      
-      // when this new request succeeds, run the displayData() function again to update the display
-      requestUpdate.onsuccess = function() {
-        displayData();
-      }
+    // function for creating the notification
+    function createNotification(title) {
+        var audio = new Audio('http://translate.google.com/translate_tts?tl=' + navigator.mozL10n.language.code + '&q=' + navigator.mozL10n.get("HourOf") + title);
+        audio.mozAudioChannelType = 'alarm';
+        audio.volume.alarm = 15;
+        
+        // Let's check if the browser supports notifications
+        if (!"Notification" in window) {
+            console.log(("NoNotifications"));
+        }
+        // Let's check if the user is okay to get some notification
+        else if (Notification.permission === "granted") {
+            // If it's okay let's create a notification
+            var img = 'https://dl.dropboxusercontent.com/u/56345835/128x128.png';
+            var text = navigator.mozL10n.get("HourOf") + " " + '"' + title + '"';
+            var notification = new Notification('To do list', { body: text, icon: img });
+            window.navigator.vibrate(2000);
+            audio.play();
+        }
+        // Otherwise, we need to ask the user for permission
+        // Note, Chrome does not implement the permission static property
+        // So we have to check for NOT 'denied' instead of 'default'
+        else if (Notification.permission !== 'denied') {
+            Notification.requestPermission(function (permission) {
+                // Whatever the user answers, we make sure Chrome stores the information
+                if(!('permission' in Notification)) {
+                    Notification.permission = permission;
+                }
+                // If the user is okay, let's create a notification
+                if (permission === "granted") {
+                    var img = 'https://dl.dropboxusercontent.com/u/56345835/128x128.png';
+                    var text = navigator.mozL10n.get("HourOf") + " " + '"' + title + '"';
+                    var notification = new Notification('To do list', { body: text, icon: img });
+                    window.navigator.vibrate(2000);
+                    audio.play();
+                }
+            });
+        }
+        // At last, if the user already denied any notification, and you
+        // want to be respectful there is no need to bother him any more.
+        // now we need to update the value of notified to "yes" in this particular data object, so the
+        // notification won't be set off on it again
+        // first open up a transaction as usual
+        var objectStore = db.transaction(['toDoList'], "readwrite").objectStore('toDoList');
+        // get the to-do list object that has this title as it's title
+        var request = objectStore.get(title);
+        request.onsuccess = function() {
+            // grab the data object returned as the result
+            var data = request.result;
+            // update the notified value in the object to "yes"
+            data.notified = "yes";
+            // create another request that inserts the item back into the database
+            var requestUpdate = objectStore.put(data);
+            // when this new request succeeds, run the displayData() function again to update the display
+            requestUpdate.onsuccess = function() {
+                displayData();
+            }
+        }
     }
-  }
-  
-  // using a setInterval to run the checkDeadlines() function every second
-  setInterval(checkDeadlines, 1000);
+    // using a setInterval to run the checkDeadlines() function every second
+    setInterval(checkDeadlines, 1000);
 }
