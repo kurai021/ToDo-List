@@ -2,11 +2,11 @@
 <html lang="es">
 <head>
   <title>TODO-list</title>
-  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
   <link href="/styles/gaiabb/all.css" rel="stylesheet" type="text/css">
   <link href="/styles/main.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="components/fontawesome/css/font-awesome.css">
-  <script src="components/jquery/dist/jquery.min.js"></script>
+  <link rel="stylesheet" href="components/fontawesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="components/jquery-mentions-input/jquery.mentionsInput.css">
 </head>
 <body role="application">
     <section id="index" data-position="current">
@@ -22,11 +22,11 @@
                  <li><a id="tohome" data-l10n-id="HomeBtn" href="#">Inicio<i class="fa fa-home fa-stack-1x"></i></a></li>
                  <li><a id="tohelp" data-l10n-id="HelpBtn" href="#">Ayuda<i class="fa fa-question-circle fa-stack-1x"></i></a></li>
              </ul>
-             <h2 data-l10n-id="Options">Sincronizar Cuentas</h2>
+             <h2 data-l10n-id="Options">Sincronizar</h2>
              <ul>
                  <li><a id="registerGoogle" data-l10n-id="RegisterGoogle">Google Calendar<i class="fa fa-google fa-stack-1x"></i></a></li>
                  <li><a data-l10n-id="RegisterOutlook">Live Calendar<i class="fa fa-windows fa-stack-1x"></i></a></li>
-                 <!--<li><a data-l10n-id="RegisterCaldav">CalDAV<i class="fa fa-calendar fa-stack-1x"></i></a></li>-->
+                 <li><a data-l10n-id="RegisterCaldav">CalDAV<i class="fa fa-calendar fa-stack-1x"></i></a></li>
              </ul>
              <h2 data-l10n-id="Contact">Contactame</h2>
              <ul>
@@ -44,20 +44,23 @@
             <menu>
                 <a id="totasklist" href="#"><span class="fa fa-angle-right fa-2x icon-white"></span></a>
             </menu>
-            <h1 data-l10n-id="MakeTask">ToDo List - Crea una Tarea</h1>
+            <h1>ToDo List</h1>
+        </header>
+        <header>
+            <h2 data-l10n-id="MakeTask">Crea una Tarea</h2>
         </header>
         <div role="main">
             <form id="task-form" action="index.html">
             <p>
-                <input id="title" data-l10n-id="NameTask" type="text" placeholder="Descripción de tarea" required="">
+                <textarea class="title" id="title" data-l10n-id="NameTask" type="text" placeholder="Descripción de tarea" required="" ></textarea>
                 <button data-l10n-id="DeleteBtn" type="reset">Borrar</button>
             </p>
             <p>
-                <input id="deadline-hours" data-l10n-id="HourTask" type="number" placeholder="Hora (HH)" required="">
+                <input id="deadline-hours" data-l10n-id="HourTask" type="number" placeholder="Hora (HH)" required="" />
                 <button data-l10n-id="DeleteBtn" type="reset">Borrar</button>
             </p>
             <p>
-                <input id="deadline-minutes" data-l10n-id="MinutesTask" type="number" placeholder="Minutos (mm)" required="">
+                <input id="deadline-minutes" data-l10n-id="MinutesTask" type="number" placeholder="Minutos (mm)" required="" />
                 <button data-l10n-id="DeleteBtn" type="reset">Borrar</button>
             </p>
             <br>
@@ -122,6 +125,12 @@
                 <option value="2019">2019</option>
                 <option value="2020">2020</option>
             </select>
+            <select name="" id="priority" class="button">
+                <option data-l10n-id="PriorityDefault" value="">Selecciona prioridad</option>
+                <option data-l10n-id="PriorityLow" value="baja">baja</option>
+                <option data-l10n-id="PriorityMedium" value="media">media</option>
+                <option data-l10n-id="PriorityHigh" value="alta">alta</option>
+            </select>
             <br>
             <button data-l10n-id="RegisterTask" type="submit" id="submit" class="recommend">Registrar Tarea</button>
         </form>
@@ -173,15 +182,27 @@
 <section id="tasklist" class="skin-dark" role="region" data-position="right">
     <header>
         <button id="toindex"><span class="fa fa-angle-left fa-2x icon-white"></span></button>
-        <h1 data-l10n-id="TaskList">ToDo List - Lista de Tareas</h1>
+        <h1>ToDo List</h1>
+    </header>
+    <header>
+        <h2 data-l10n-id="TaskList">Lista de Tareas</h2>
     </header>
     <section data-type="list">
-        <ul id="task-list"></ul>
+        <ul id="task-list" class="block__list block__list_words"></ul>
     </section>
 </section>
 </body>
-    <script defer src="scripts/main.js"></script>
-    <script defer src="scripts/reopen.js"></script>
-    <script defer src="scripts/l10n.js" charset="utf-8"></script>
+    <script src="components/jquery/dist/jquery.min.js"></script>
+    <script src="components/underscore/underscore.js"></script>
+    <script src="components/jquery-mentions-input/lib/jquery.events.input.js"></script>
+    <script src="components/jquery-mentions-input/lib/jquery.elastic.js"></script>
+    <script src="components/jquery-mentions-input/jquery.mentionsInput.js"></script>
+    <script src="components/Sortable/Sortable.min.js"></script>
+    <script src="scripts/drawer.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/reopen.js"></script>
+    <script src="scripts/tag.js"></script>
+    <script src="scripts/sortable.js"></script>
+    <script src="scripts/l10n.js" charset="utf-8"></script>
     <link rel="resource" type="application/l10n" href="locales/locales.ini" />
 </html>

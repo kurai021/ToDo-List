@@ -1,9 +1,9 @@
 window.onunload = function() {
-    var request_reopen = navigator.mozAlarms.add(new Date((+new Date()) + 30000), 'ignoreTimezone', {
+    var request_reopen = navigator.mozAlarms.add(new Date((+new Date()) + 10000), 'ignoreTimezone', {
         type: 'yolo'
     });
 
-    console.log('setting to', new Date((+new Date()) + 30000) + '')
+    console.log('setting to', new Date((+new Date()) + 10000) + '')
 
     request_reopen.onsuccess = function() {
         console.log('success');

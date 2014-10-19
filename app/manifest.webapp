@@ -37,10 +37,17 @@
     },
     "audio-channel-alarm":{
         "description": "Use the audio channel for hear a voice telling your current task"
-        }
+    }
   },
   "messages": [
     { "alarm": "/index.html" },
     { "notification": "/index.html" }
-  ]
+  ],
+  "activities": {
+      "pick": {
+        "href": "/index.html",
+        "disposition": "inline",
+        "returnValue": true
+      }
+  }
 }

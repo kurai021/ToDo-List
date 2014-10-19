@@ -12,6 +12,39 @@ p
 
 form, .task-box
     margin: 1rem
+
+.hashtag-text
+    color: #22AA66
+
+.contact-text
+    color: #AA3300
+        
+.event-text
+    color: #009EE5
+        
+form p div + button[type="reset"]
+    position: absolute
+    top: 50%
+    right: 0
+    width: 3rem
+    height: 4rem
+    padding: 0
+    border: none
+    font-size: 0
+    opacity: 0
+    pointer-events: none
+    background: transparent url(gaiabb/input_areas/images/icons/clear.png) no-repeat 50% 50% / 1.7rem auto
+        
+form.skin-dark p div + button[type="reset"]
+    background-image: url(gaiabb/input_areas/images/icons/clear-dark.png)
+        
+form p div + button[type="reset"]
+    top: 0
+    margin: 0
+    
+form p div:focus + button[type="reset"]
+    opacity: 1
+    pointer-events: all
         
 .icon-white
     color: white
@@ -37,14 +70,34 @@ form, .task-box
 #googlecalendar
     margin: 0
     z-index: 9999
-        
+    
+[data-type="list"]
+    padding: 0
+    
 [data-type="list"] li
-    height: 10rem
+    height: auto
+    p
+        white-space: initial
+
+[data-type="list"] li[aria-disabled="true"]
+    opacity: 1
+    p
+        opacity: 0.2
+[data-type="list"] li[aria-disabled="true"] button
+    opacity: 1
+    pointer-events: auto
         
 section[role="region"]
     background-color: white
     height: 100%
     overflow-y: scroll
+        
+li .button, li a[role="button"], li button
+    margin-left: 0.7rem
+    text-align: center
+        
+.sortable-ghost
+    opacity: .2
 
 #index
     height: 100%

@@ -96,7 +96,7 @@ module.exports = function (grunt) {
     connect: {
       server: {
         options: {
-          port: 9000,
+          port: 9001,
           middleware: function (connect) {
             return [
               mountFolder(connect, '.tmp'),
@@ -156,9 +156,11 @@ module.exports = function (grunt) {
             '!styles/gaiabb/**/*.css',
             'styles/gaiabb/all.css',
             'styles/gaiabb/**/*.{png,gif,jpg,jpeg,svg}',
+	    'components/**/*.{js,css,min.js,min.css,otf,eot,svg,ttf,woff}',
             'scripts/**/*.js',
             'icons/**/*.{png,jpg,jpeg,svg}',
             'images/**/*.{png,gif,jpg,jpeg,svg}',
+	    'locales/*.{ini,properties}',
             '*.html',
             'manifest.webapp'
           ],
