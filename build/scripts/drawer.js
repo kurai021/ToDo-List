@@ -36,11 +36,11 @@ document.querySelector('#toindex').addEventListener('click', function () {
 });
 
 //Google Calendar, Live Calendar and CalDAV support
-document.querySelector('#registerGoogle').addEventListener('click', function () {
-    document.querySelector('#googlecalendar-section').setAttribute('class', 'visible');
-});
+//document.querySelector('#registerGoogle').addEventListener('click', function () {
+  //  document.querySelector('#googlecalendar-section').setAttribute('class', 'visible');
+//});
 
-document.querySelector('#cancelgoogle').addEventListener('click', function () {
-    document.querySelector('#googlecalendar-section').setAttribute('class', 'notvisible');
-}); 
+//document.querySelector('#cancelgoogle').addEventListener('click', function () {
+  //  document.querySelector('#googlecalendar-section').setAttribute('class', 'notvisible');
+//}); 
 });

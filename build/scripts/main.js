@@ -28,10 +28,11 @@ var year = document.getElementById('deadline-year');
 var priority = document.getElementById('priority');
 
 var submit = document.getElementById('submit');
+var mozL10n = navigator.mozL10n.get;
 
 window.onload = function () {
 
-    console.log(("AppIni"));
+    console.log(mozL10n("AppIni"));
     // In the following line, you should include the prefixes of implementations you want to test.
     window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
     // DON'T use "var indexedDB = ..." if you're not in a function.
@@ -49,11 +50,11 @@ window.onload = function () {
 
     // these two event handlers act on the database being opened successfully, or not
     request.onerror = function (event) {
-        console.log(("ErrorLoBD"));
+        console.log(mozL10n("ErrorLoBD"));
     };
 
     request.onsuccess = function (event) {
-        console.log(("SuccessLoBD"));
+        console.log(mozL10n("SuccessLoBD"));
 
         // store the result of opening the database in the db variable. This is used a lot below
         db = request.result;
@@ -70,7 +71,7 @@ window.onload = function () {
         var db = event.target.result;
 
         db.onerror = function (event) {
-            console.log(navigator.mozL10n.get("ErrorLoBD"));
+            console.log(mozL10n("ErrorLoBD"));
         };
 
         // Create an objectStore for this database
@@ -105,7 +106,7 @@ window.onload = function () {
             unique: false
         });
 
-        console.log(("ObjectStorage"));
+        console.log(mozL10n("ObjectStorage"));
     };
 
     function displayData() {
@@ -135,7 +136,6 @@ window.onload = function () {
                 }
                 
                 listItem.setAttribute('class', 'listitem');
-                listItem.setAttribute('data-id', cursor.value.taskTitle);
                 
                 // build the to-do list entry and put it into the list item via innerHTML.
                 listItem.innerHTML = '<p class="tasktitle">' + cursor.value.taskTitle + '</p>' + '<p>' + cursor.value.hours + ':' + cursor.value.minutes + ', ' + cursor.value.month + ' ' + cursor.value.day + daySuffix + ' ' + cursor.value.year + '.' + '</p>';
@@ -179,11 +179,11 @@ window.onload = function () {
 
                 // if there are no more cursor items to iterate through, say so, and exit the function 
             } else {
-                console.log(("AllEntries"));
+                console.log(mozL10n("AllEntries"));
             }
         }
     }
-
+    
     // give the form submit button an event listener so that when the form is submitted the addData() function is run
     taskForm.addEventListener('submit', addData, false);
 
@@ -194,7 +194,7 @@ window.onload = function () {
         // Stop the form submitting if any values are left empty. This is just for browsers that don't support the HTML5 form
         // required attributes
         if (title.value == '' || hours.value == null || minutes.value == null || day.value == '' || month.value == '' || year.value == null || priority.value == null) {
-            window.alert(navigator.mozL10n.get("DataEForm"));
+            window.alert(mozL10n("DataEForm"));
             return;
         } else {
 
@@ -217,11 +217,11 @@ window.onload = function () {
 
             // report on the success of opening the transaction
             transaction.oncomplete = function (event) {
-                console.log(("TransactOpen"));
+                console.log(mozL10n("TransactOpen"));
             };
 
             transaction.onerror = function (event) {
-                window.alert(("DuplicateData"));
+                window.alert(mozL10n("DuplicateData"));
             };
 
             // call an object store that's already been added to the database
@@ -231,7 +231,7 @@ window.onload = function () {
             request.onsuccess = function (event) {
 
                 // report the success of our new item going into the database
-                window.alert(navigator.mozL10n.get("NewTaskM"));
+                window.alert(mozL10n("NewTaskM"));
                 
                 //build a date object out of the user-provided time and date information from the form submission
                 var myAlarmDate = new Date(month.value + " " + day.value + ", " + year.value + " " + hours.value + ":" + minutes.value + ":00" + " " + priority.value);
@@ -247,11 +247,11 @@ window.onload = function () {
                 } + data);
 
                 request.onsuccess = function () {
-                    console.log(("AlarmActivated"));
+                    console.log(mozL10n("AlarmActivated"));
                 };
 
                 request.onerror = function () {
-                    console.log(("ErrorOcurred") + " " + this.error.name);
+                    console.log(mozL10n("ErrorOcurred") + " " + this.error.name);
                 };
 
 
@@ -284,7 +284,7 @@ window.onload = function () {
 
         // report that the data item has been deleted
         request.onsuccess = function (event) {
-            window.alert(navigator.mozL10n.get("TaskDel1") + " " + dataTask + " " + navigator.mozL10n.get("TaskDel2"));
+            window.alert(mozL10n("TaskDel1") + " " + dataTask + " " + mozL10n("TaskDel2"));
         };
 
     }
@@ -338,7 +338,7 @@ window.onload = function () {
                 } else if (cursor.value.month == "December" || cursor.value.month == "Diciembre") {
                     monthNumber = 11
                 } else {
-                    alert(navigator.mozL10n.get("IncorrectMonth"));
+                    alert(mozL10n("IncorrectMonth"));
                 }
 
                 // check if the current hours, minutes, day, month and year values match the stored values for each task in the IDB.
@@ -366,13 +366,13 @@ window.onload = function () {
 
         // Let's check if the browser supports notifications
         if (!"Notification" in window) {
-            console.log(("NoNotifications"));
+            console.log(mozL10n("NoNotifications"));
         }
         // Let's check if the user is okay to get some notification
         else if (Notification.permission === "granted") {
             // If it's okay let's create a notification
             var img = 'https://dl.dropboxusercontent.com/u/56345835/128x128.png';
-            var text = navigator.mozL10n.get("HourOf") + " " + '"' + title + '"';
+            var text = mozL10n("HourOf") + " " + '"' + title + '"';
             var notification = new Notification('To do list', {
                 body: text,
                 icon: img
@@ -392,7 +392,7 @@ window.onload = function () {
                 // If the user is okay, let's create a notification
                 if (permission === "granted") {
                     var img = 'https://dl.dropboxusercontent.com/u/56345835/128x128.png';
-                    var text = navigator.mozL10n.get("HourOf") + " " + '"' + title + '"';
+                    var text = mozL10n("HourOf") + " " + '"' + title + '"';
                     var notification = new Notification('To do list', {
                         body: text,
                         icon: img
@@ -425,4 +425,5 @@ window.onload = function () {
     }
     // using a setInterval to run the checkDeadlines() function every second
     setInterval(checkDeadlines, 1000);
+    
 }

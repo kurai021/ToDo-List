@@ -9,6 +9,15 @@
   <link rel="stylesheet" href="components/jquery-mentions-input/jquery.mentionsInput.css">
 </head>
 <body role="application">
+    <section id="boot">
+        <div class="boot-animation text-center">
+           <h2>ToDo List</h2>
+            <p>
+                <progress max="100" value="0" class="pack-activity"></progress>
+            </p>
+        </div>
+    </section>
+   
     <section id="index" data-position="current">
         <section data-type="sidebar">
            <header>
@@ -17,16 +26,10 @@
              </menu>
              <h1 data-l10n-id="Menu">Menú</h1>
            </header>
-           <nav>
+           <nav class="scrollable">
              <ul>
                  <li><a id="tohome" data-l10n-id="HomeBtn" href="#">Inicio<i class="fa fa-home fa-stack-1x"></i></a></li>
                  <li><a id="tohelp" data-l10n-id="HelpBtn" href="#">Ayuda<i class="fa fa-question-circle fa-stack-1x"></i></a></li>
-             </ul>
-             <h2 data-l10n-id="Options">Sincronizar</h2>
-             <ul>
-                 <li><a id="registerGoogle" data-l10n-id="RegisterGoogle">Google Calendar<i class="fa fa-google fa-stack-1x"></i></a></li>
-                 <li><a data-l10n-id="RegisterOutlook">Live Calendar<i class="fa fa-windows fa-stack-1x"></i></a></li>
-                 <li><a data-l10n-id="RegisterCaldav">CalDAV<i class="fa fa-calendar fa-stack-1x"></i></a></li>
              </ul>
              <h2 data-l10n-id="Contact">Contactame</h2>
              <ul>
@@ -38,7 +41,7 @@
     </section>
 
     <section id="drawer" class="skin-dark" role="region">
-        <header class="fixed">
+        <header>
             <a href="#content"><span class="icon icon-menu">hide sidebar</span></a>
             <a href="#drawer"><span class="icon icon-menu">show sidebar</span></a>
             <menu>
@@ -49,19 +52,16 @@
         <header>
             <h2 data-l10n-id="MakeTask">Crea una Tarea</h2>
         </header>
-        <div role="main">
+        <div role="main" class="scrollable">
             <form id="task-form" action="index.html">
             <p>
                 <textarea class="title" id="title" data-l10n-id="NameTask" type="text" placeholder="Descripción de tarea" required="" ></textarea>
-                <button data-l10n-id="DeleteBtn" type="reset">Borrar</button>
             </p>
             <p>
                 <input id="deadline-hours" data-l10n-id="HourTask" type="number" placeholder="Hora (HH)" required="" />
-                <button data-l10n-id="DeleteBtn" type="reset">Borrar</button>
             </p>
             <p>
                 <input id="deadline-minutes" data-l10n-id="MinutesTask" type="number" placeholder="Minutos (mm)" required="" />
-                <button data-l10n-id="DeleteBtn" type="reset">Borrar</button>
             </p>
             <br>
             <select name="" id="deadline-day" class="button">
@@ -80,7 +80,7 @@
                 <option value="12">12</option>
                 <option value="13">13</option>
                 <option value="14">14</option>
-                <option value="15">15</option>
+                <option value="15">15</option> 
                 <option value="16">16</option>
                 <option value="17">17</option>
                 <option value="18">18</option>
@@ -138,27 +138,6 @@
     </section>
 </section>
 
-<section id="googlecalendar-section" class="notvisible">
-        <form id="googlecalendar" action="" role="dialog" data-type="object">
-            <header>Google Calendar</header>
-            <section>
-              <p>
-                  <input type="text" placeholder="Email" required>
-                  <button data-l10n-id="DeleteBtn" type="reset">Borrar</button>
-              </p>
-              <p>
-                  <input type="password" placeholder="Password" required>
-                  <button data-l10n-id="DeleteBtn" type="reset">Borrar</button>
-              </p>
-            </section>
-            <menu type="toolbar">
-                <button id="id" class="full">Aceptar</button>
-                <button disabled>Desvincular</button>
-                <button id="cancelgoogle" class="full">Cancelar</button>
-            </menu>
-        </form>
-    </section>
-
 <section id="aboutapp" class="skin-dark" role="region" data-position="left">
     <header class="fixed">
         <a href="#content"><span class="icon icon-menu">hide sidebar</span></a>
@@ -186,23 +165,29 @@
     </header>
     <header>
         <h2 data-l10n-id="TaskList">Lista de Tareas</h2>
+        <form id="form-task-search" role="search">
+            <p>
+               <input data-l10n-id="Task-search" id="task-search" type="text" placeholder="Buscar Tarea...">
+            </p>
+        </form>
     </header>
-    <section data-type="list">
-        <ul id="task-list" class="block__list block__list_words"></ul>
-    </section>
+    <div class="scrollable" id="task" data-type="list">
+        <ul id="task-list" class="list"></ul>
+    </div>
 </section>
 </body>
-    <script src="components/jquery/dist/jquery.min.js"></script>
-    <script src="components/underscore/underscore.js"></script>
-    <script src="components/jquery-mentions-input/lib/jquery.events.input.js"></script>
-    <script src="components/jquery-mentions-input/lib/jquery.elastic.js"></script>
-    <script src="components/jquery-mentions-input/jquery.mentionsInput.js"></script>
-    <script src="components/Sortable/Sortable.min.js"></script>
-    <script src="scripts/drawer.js"></script>
-    <script src="scripts/main.js"></script>
-    <script src="scripts/reopen.js"></script>
-    <script src="scripts/tag.js"></script>
-    <script src="scripts/sortable.js"></script>
-    <script src="scripts/l10n.js" charset="utf-8"></script>
-    <link rel="resource" type="application/l10n" href="locales/locales.ini" />
+    <script type="text/javascript" src="components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="components/underscore/underscore.js"></script>
+    <script type="text/javascript" src="components/jquery-mentions-input/lib/jquery.events.input.js"></script>
+    <script type="text/javascript" src="components/jquery-mentions-input/lib/jquery.elastic.js"></script>
+    <script type="text/javascript" src="components/jquery-mentions-input/jquery.mentionsInput.js"></script>
+    <script type="text/javascript" src="components/jquery-searcher/dist/jquery.searcher.min.js"></script>
+    <script type="text/javascript" src="scripts/boot.js"></script>
+    <script type="text/javascript" src="scripts/drawer.js"></script>
+    <script type="text/javascript" defer src="scripts/main.js"></script>
+    <script type="text/javascript" src="scripts/reopen.js"></script>
+    <script type="text/javascript" defer src="scripts/tag.js"></script>
+    <script type="text/javascript" defer src="scripts/taskfilter.js"></script>
+    <script type="text/javascript" src="scripts/l10n.js" charset="utf-8"></script>
+    <link rel="prefetch" type="application/l10n" href="locales/locales.ini" />
 </html>

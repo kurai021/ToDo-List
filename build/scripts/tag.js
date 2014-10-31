@@ -66,7 +66,7 @@ $(document).ready(function(){
                 console.log("got contact");
                 var contact = this.result;
                 if( contact ){
-                    $('textarea.title').val($('textarea.title').val() + contact.name + ',');
+                    $('textarea.title').val($('textarea.title').val() + contact.name + '.');
                  //console.log( "Name " + contact.name + " number "+ contact.number );
                 }
             }

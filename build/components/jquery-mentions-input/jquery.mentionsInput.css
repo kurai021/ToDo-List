@@ -22,44 +22,41 @@
 
 .mentions-input-box .mentions-autocomplete-list {
   display: none;
-  background: #fff;
   border: 1px solid #b2b2b2;
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   z-index: 10000;
   margin-top: -2px;
-
-  border-radius:5px;
-  border-top-right-radius:0;
-  border-top-left-radius:0;
-
-  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.148438);
-     -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.148438);
-          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.148438);
 }
 
 .mentions-input-box .mentions-autocomplete-list ul {
     margin: 0;
-    padding: 0;
+    padding: 0 1.5rem 0;
+    -moz-box-sizing: padding-box;
 }
 
 .mentions-input-box .mentions-autocomplete-list li {
-  background-color: #fff;
-  padding: 0 5px;
-  margin: 0;
-  width: auto;
-  border-bottom: 1px solid #eee;
-  height: 26px;
-  line-height: 26px;
-  overflow: hidden;
-  cursor: pointer;
-  list-style: none;
-  white-space: nowrap;
+    margin: 0;
+    padding: 0 1.5rem;
+    height: auto;
+    list-style: none;
+    position: relative;
+    font-weight: lighter;
+    font-size: 2.2rem;
+    line-height: 3.9rem;
+    color: #fff;
+    transition: background-color 0.2s ease;
+    border-top: 0.1rem solid #666;
+    display: block;
+    outline: none;
 }
 
-.mentions-input-box .mentions-autocomplete-list li:last-child {
-  border-radius:5px;
+.mentions-input-box .mentions-autocomplete-list li label {
+    outline: none;
+    display: block;
+    color: #fff;
+    border-top: 0.1rem solid #666;
 }
 
 .mentions-input-box .mentions-autocomplete-list li > img,
@@ -79,13 +76,11 @@
   font-style: none;
 }
 
-.mentions-input-box .mentions-autocomplete-list li:hover,
-.mentions-input-box .mentions-autocomplete-list li.active {
-  background-color: #f2f2f2;
+.mentions-input-box .mentions-autocomplete-list li:hover{
+  background-color: #00ABCC;
 }
 
 .mentions-input-box .mentions-autocomplete-list li b {
-  background: #ffff99;
   font-weight: normal;
 }
 

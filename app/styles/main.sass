@@ -7,11 +7,28 @@ body
     font: 1.6rem/2.2rem MozTT, sans-serif
     color: #000
 
+#boot
+    background-color: white 
+    display: table
+    position: fixed
+    z-index: 9999
+    width: 100%
+    height: 100%
+    .boot-animation
+        display: table-cell
+        vertical-align: middle
 p
     margin: 1rem
 
+.scrollable
+    overflow-y: scroll
+    height: calc(100% - 88px)
+
 form, .task-box
     margin: 1rem
+
+#form-task-search
+    margin: 0rem !important
 
 .hashtag-text
     color: #22AA66
@@ -34,6 +51,10 @@ form p div + button[type="reset"]
     opacity: 0
     pointer-events: none
     background: transparent url(gaiabb/input_areas/images/icons/clear.png) no-repeat 50% 50% / 1.7rem auto
+
+form p div:clicked + button[type="reset"]
+    opacity: 1
+    pointer-events: all
         
 form.skin-dark p div + button[type="reset"]
     background-image: url(gaiabb/input_areas/images/icons/clear-dark.png)
@@ -90,7 +111,6 @@ form p div:focus + button[type="reset"]
 section[role="region"]
     background-color: white
     height: 100%
-    overflow-y: scroll
         
 li .button, li a[role="button"], li button
     margin-left: 0.7rem

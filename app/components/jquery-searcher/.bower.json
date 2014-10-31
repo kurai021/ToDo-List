@@ -1,0 +1,33 @@
+{
+  "name": "jquery-searcher",
+  "title": "jQuery Searcher Plugin",
+  "version": "0.2.0",
+  "description": "Connects any list-like data with an input for searching.",
+  "license": "MIT",
+  "keywords": [
+    "searcher",
+    "search",
+    "filter",
+    "table",
+    "list",
+    "connect"
+  ],
+  "dependencies": {
+    "jquery": ">=1.4.3"
+  },
+  "devDependencies": {
+    "qunitjs": "~1.14.0",
+    "blanket": "~1.1.6"
+  },
+  "homepage": "https://github.com/lloiser/jquery-searcher",
+  "_release": "0.2.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.2.0",
+    "commit": "41920fa66586e90789368fcae87a69e4e9eccaba"
+  },
+  "_source": "git://github.com/lloiser/jquery-searcher.git",
+  "_target": "~0.2.0",
+  "_originalSource": "jquery-searcher",
+  "_direct": true
+}
