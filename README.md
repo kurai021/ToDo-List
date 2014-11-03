@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # TODO-list
 
 ## Getting started
@@ -196,9 +195,8 @@ $ grunt server:test
 This will start a web server in [0.0.0.0:9002](0.0.0.0:9002) with your
 test suite loaded in `/`.
 
-=======
-WAW4-IndexedDB-Alarmapi
+=======================
+ToDo List
 =======================
 
 Ejemplo todo-list con indexeddb y alarm api
->>>>>>> 49bc42c2c34dda0ddde91510e633d85179ca3724

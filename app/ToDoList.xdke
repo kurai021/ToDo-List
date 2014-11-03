@@ -3,6 +3,11 @@
     "projectSettingsVersion": "1.1",
     "initialAutoPluginCount": 2,
     "projectFiles": {},
-    "projectDirectories": {}
+    "projectDirectories": {},
+    "currentService": {
+      "methodapi": "",
+      "endPoint": "1touch",
+      "service": "appmobi"
+    }
   }
 }
