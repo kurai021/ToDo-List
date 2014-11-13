@@ -1,7 +1,8 @@
 {
-  "name": "zf5_project",
+  "name": "waw4-indexeddb-alarmapi",
+  "private": true,
   "dependencies": {
-    "foundation": "zurb/bower-foundation",
-    "font-awesome": "~4.2.0" 
+    "bootstrap-sass-official": "~3.2.0",
+    "modernizr": "~2.8.2"
   }
 }
