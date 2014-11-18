@@ -1,9 +1,9 @@
 $(document).ready(function(){
     $('textarea.title').mentionsInput({
         onDataRequest:function (mode, query, callback) {
-            
+
             var data;
-            
+
             if(navigator.mozL10n.language.code == 'es'){
                 data = [
                     { id:1, name:'!'+'ahora', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' },
@@ -25,8 +25,8 @@ $(document).ready(function(){
                     { id:17, name:'!'+'sabado', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' }
                 ];
             }
-            
-            else{
+
+            if(navigator.mozL10n.language.code == 'en-US'){
                 data = [
                     { id:1, name:'!'+'now', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' },
                     { id:2, name:'!'+'later', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' },
@@ -46,13 +46,34 @@ $(document).ready(function(){
                     { id:15, name:'!'+'saturday', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' }
                 ];
             }
-            
+
+            if(navigator.mozL10n.language.code == 'de'){
+                data = [
+                    { id:1, name:'!'+'jetzt', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' },
+                    { id:2, name:'!'+'später', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' },
+                    { id:3, name:'!'+'morgen', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' },
+                    { id:4, name:'!'+'nächste_woche', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' },
+                    { id:5, name:'!'+'im_nächsten_monat', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' },
+                    { id:6, name:'!'+'wochenende', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' },
+                    { id:7, name:'!'+'übermorgen', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' },
+                    { id:7, name:'!'+'bald', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' },
+                    { id:8, name:'!'+'heute', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' },
+                    { id:9, name:'!'+'sonntag', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' },
+                    { id:10, name:'!'+'montag', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' },
+                    { id:11, name:'!'+'diestag', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' },
+                    { id:12, name:'!'+'mittwoch', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' },
+                    { id:13, name:'!'+'donnerstag', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' },
+                    { id:14, name:'!'+'freitag', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' },
+                    { id:15, name:'!'+'samstag', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'hashtag' }
+                ];
+            }
+
             data = _.filter(data, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
 
             callback.call(this, data);
         }
     });
-    
+
     $('textarea.title').keypress(function(e){
         if(e.which == 64){
             var pick = new MozActivity({
@@ -61,7 +82,7 @@ $(document).ready(function(){
                     type: "webcontacts/contact"
                 }
             });
-            
+
             pick.onsuccess = function(){
                 console.log("got contact");
                 var contact = this.result;

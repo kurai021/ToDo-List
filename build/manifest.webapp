@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "name": "TODO List",
   "description": "TODO List with Alarm",
   "launch_path": "/index.html",
@@ -11,19 +11,25 @@
   },
   "developer": {
     "name": "Richard Armuelles",
-    "url": "https://github.com/kurai021/WAW4-IndexedDB-Alarmapi"
+    "url": "https://github.com/kurai021/ToDo-List"
   },
   "locales": {
     "es": {
       "description": "TODO List con Alarma",
       "developer": {
-        "url": "https://github.com/kurai021/WAW4-IndexedDB-Alarmapi"
+        "url": "https://github.com/kurai021/ToDo-List"
       }
     },
     "en": {
       "description": "TODO List with Alarm",
       "developer": {
-        "url": "https://github.com/kurai021/WAW4-IndexedDB-Alarmapi"
+        "url": "https://github.com/kurai021/ToDo-List"
+      }
+    },
+    "de": {
+      "description": "TODO List mit Alarm",
+      "developer": {
+        "url": "https://github.com/kurai021/ToDo-List"
       }
     }
   },

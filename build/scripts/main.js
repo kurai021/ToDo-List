@@ -14,7 +14,7 @@ var newItem = [
     }
     ];
 
-// all the variables we need for the app    
+// all the variables we need for the app
 var taskList = document.getElementById('task-list');
 
 var taskForm = document.getElementById('task-form');
@@ -97,7 +97,7 @@ window.onload = function () {
         objectStore.createIndex("year", "year", {
             unique: false
         });
-        
+
         objectStore.createIndex("priority", "priority", {
             unique: false
         });
@@ -134,12 +134,12 @@ window.onload = function () {
                 } else {
                     daySuffix = "th";
                 }
-                
+
                 listItem.setAttribute('class', 'listitem');
-                
+
                 // build the to-do list entry and put it into the list item via innerHTML.
                 listItem.innerHTML = '<p class="tasktitle">' + cursor.value.taskTitle + '</p>' + '<p>' + cursor.value.hours + ':' + cursor.value.minutes + ', ' + cursor.value.month + ' ' + cursor.value.day + daySuffix + ' ' + cursor.value.year + '.' + '</p>';
-                
+
                 if((cursor.value.priority == "baja") && (cursor.value.notified == "no")){
                     listItem.style.borderLeft = "5px solid green";
                 }
@@ -153,7 +153,7 @@ window.onload = function () {
                     listItem.style.borderLeft = "5px solid gray";
                     listItem.setAttribute('aria-disabled','true');
                 }
-                
+
                 listItem.innerHTML = listItem.innerHTML.replace(/(^|\W)(#[a-z_\d][\w-ñ&]*)/ig,"$1<span class='hashtag-text'>$2</span>");
                 listItem.innerHTML = listItem.innerHTML.replace(/(^|\W)(![a-z_\d][\w-ñ&]*)/ig,"$1<span class='event-text'>$2</span>");
                 listItem.innerHTML = listItem.innerHTML.replace(/(^|\W)(@[a-z_\d][\w-ñ& ]*)/ig,"$1<span class='contact-text'>$2</span>");
@@ -177,13 +177,13 @@ window.onload = function () {
                 // continue on to the next item in the cursor
                 cursor.continue();
 
-                // if there are no more cursor items to iterate through, say so, and exit the function 
+                // if there are no more cursor items to iterate through, say so, and exit the function
             } else {
                 console.log(mozL10n("AllEntries"));
             }
         }
     }
-    
+
     // give the form submit button an event listener so that when the form is submitted the addData() function is run
     taskForm.addEventListener('submit', addData, false);
 
@@ -232,7 +232,7 @@ window.onload = function () {
 
                 // report the success of our new item going into the database
                 window.alert(mozL10n("NewTaskM"));
-                
+
                 //build a date object out of the user-provided time and date information from the form submission
                 var myAlarmDate = new Date(month.value + " " + day.value + ", " + year.value + " " + hours.value + ":" + minutes.value + ":00" + " " + priority.value);
 
@@ -273,7 +273,7 @@ window.onload = function () {
     };
 
     function deleteItem(event) {
-        // retrieve the name of the task we want to delete 
+        // retrieve the name of the task we want to delete
         var dataTask = event.target.getAttribute('data-task');
 
         // delete the parent of the button, which is the list item, so it no longer is displayed
@@ -292,10 +292,10 @@ window.onload = function () {
     // this function checks whether the deadline for each task is up or not, and responds appropriately
     function checkDeadlines() {
 
-        // grab the time and date right now 
+        // grab the time and date right now
         var now = new Date();
 
-        // from the now variable, store the current minutes, hours, day of the month (getDate is needed for this, as getDay 
+        // from the now variable, store the current minutes, hours, day of the month (getDate is needed for this, as getDay
         // returns the day of the week, 1-7), month, year (getFullYear needed; getYear is deprecated, and returns a weird value
         // that is not much use to anyone!) and seconds
         var minuteCheck = now.getMinutes();
@@ -304,38 +304,38 @@ window.onload = function () {
         var monthCheck = now.getMonth();
         var yearCheck = now.getFullYear();
 
-        // again, open a transaction then a cursor to iterate through all the data items in the IDB   
+        // again, open a transaction then a cursor to iterate through all the data items in the IDB
         var objectStore = db.transaction(['toDoList'], "readwrite").objectStore('toDoList');
         objectStore.openCursor().onsuccess = function (event) {
             var cursor = event.target.result;
             if (cursor) {
                 var monthNumber
-                // convert the month names we have installed in the IDB into a month number that JavaScript will understand. 
+                // convert the month names we have installed in the IDB into a month number that JavaScript will understand.
                 // The JavaScript date object creates month values as a number between 0 and 11.
 
-                if (cursor.value.month == "January" || cursor.value.month == "Enero") {
+                if (cursor.value.month == "January" || cursor.value.month == "Enero" || cursor.value.month == "Januar") {
                     monthNumber = 0
-                } else if (cursor.value.month == "February" || cursor.value.month == "Febrero") {
+                } else if (cursor.value.month == "February" || cursor.value.month == "Febrero" || cursor.value.month == "Februar") {
                     monthNumber = 1
-                } else if (cursor.value.month == "March" || cursor.value.month == "Marzo") {
+                } else if (cursor.value.month == "March" || cursor.value.month == "Marzo" || cursor.value.month == "März") {
                     monthNumber = 2
                 } else if (cursor.value.month == "April" || cursor.value.month == "Abril") {
                     monthNumber = 3
-                } else if (cursor.value.month == "May" || cursor.value.month == "Mayo") {
+                } else if (cursor.value.month == "May" || cursor.value.month == "Mayo" || cursor.value.month == "Mai") {
                     monthNumber = 4
-                } else if (cursor.value.month == "June" || cursor.value.month == "Junio") {
+                } else if (cursor.value.month == "June" || cursor.value.month == "Junio" || cursor.value.month == "Juni") {
                     monthNumber = 5
-                } else if (cursor.value.month == "July" || cursor.value.month == "Julio") {
+                } else if (cursor.value.month == "July" || cursor.value.month == "Julio" || cursor.value.month == "Juli") {
                     monthNumber = 6
                 } else if (cursor.value.month == "August" || cursor.value.month == "Agosto") {
                     monthNumber = 7
                 } else if (cursor.value.month == "September" || cursor.value.month == "Septiembre") {
                     monthNumber = 8
-                } else if (cursor.value.month == "October" || cursor.value.month == "Octubre") {
+                } else if (cursor.value.month == "October" || cursor.value.month == "Octubre" || cursor.value.month == "Oktober") {
                     monthNumber = 9
                 } else if (cursor.value.month == "November" || cursor.value.month == "Noviembre") {
                     monthNumber = 10
-                } else if (cursor.value.month == "December" || cursor.value.month == "Diciembre") {
+                } else if (cursor.value.month == "December" || cursor.value.month == "Diciembre" || cursor.value.month == "Dezember") {
                     monthNumber = 11
                 } else {
                     alert(mozL10n("IncorrectMonth"));
@@ -425,5 +425,5 @@ window.onload = function () {
     }
     // using a setInterval to run the checkDeadlines() function every second
     setInterval(checkDeadlines, 1000);
-    
+
 }
