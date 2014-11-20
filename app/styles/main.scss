@@ -14,6 +14,10 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 body {
   padding-top: 20px;
   padding-bottom: 20px;
+  .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -50,6 +54,8 @@ body {
 
 /* Main marketing message and sign up button */
 .jumbotron {
+  padding-top: 160px;
+  padding-bottom: 220px;
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
   .btn {
@@ -68,9 +74,6 @@ body {
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
 
   /* Remove the padding we set earlier */
   .header,
