@@ -1,17 +1,20 @@
 window.onunload = function() {
-    var request_reopen = navigator.mozAlarms.add(new Date((+new Date()) + 10000), 'ignoreTimezone', {
-        type: 'yolo'
-    });
+    'use strict';
+    var request_reopen = navigator.mozAlarms.add(
+        new Date( (+new Date()) + 10000),
+        'ignoreTimezone', {
+            type: 'yolo'
+        });
 
-    console.log('setting to', new Date((+new Date()) + 10000) + '')
+    console.log('setting to', new Date((+new Date()) + 10000) + '');
 
     request_reopen.onsuccess = function() {
         console.log('success');
-    }
+    };
 
     request_reopen.onerror = function() {
         console.error('err');
-    }
+    };
 
     navigator.mozSetMessageHandler('alarm', function() {
         console.log('alarm');
@@ -26,4 +29,4 @@ window.onunload = function() {
             }
         };
     }
-}
+};

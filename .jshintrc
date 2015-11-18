@@ -20,10 +20,13 @@
   "unused": true,
   "white": true,
   "predef": [
-    "define",
-    "require",
-    "it",
+    "$",
+    "_",
     "chai",
-    "describe"
+    "define",
+    "describe",
+    "it",
+    "MozActivity",
+    "require"
   ]
 }
