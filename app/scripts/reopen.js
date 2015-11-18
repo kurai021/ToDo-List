@@ -1,17 +1,24 @@
 window.onunload = function() {
-    var request_reopen = navigator.mozAlarms.add(new Date((+new Date()) + 10000), 'ignoreTimezone', {
-        type: 'yolo'
-    });
+    'use strict';
+    if (!('mozAlarms' in window.navigator)) {
+        // No alarm supported. return early
+        return;
+    }
+    var requestReopen = window.navigator.mozAlarms.add(
+        new Date( (+new Date()) + 10000),
+        'ignoreTimezone', {
+            type: 'yolo'
+        });
 
-    console.log('setting to', new Date((+new Date()) + 10000) + '')
+    console.log('setting to', new Date((+new Date()) + 10000) + '');
 
-    request_reopen.onsuccess = function() {
+    requestReopen.onsuccess = function() {
         console.log('success');
-    }
+    };
 
-    request_reopen.onerror = function() {
+    requestReopen.onerror = function() {
         console.error('err');
-    }
+    };
 
     navigator.mozSetMessageHandler('alarm', function() {
         console.log('alarm');
@@ -19,11 +26,11 @@ window.onunload = function() {
     });
 
     function launchSelf() {
-        var request_launchself = window.navigator.mozApps.getSelf();
-        request_launchself.onsuccess = function() {
-            if (request_launchself.result) {
-                request_launchself.result.launch();
+        var requestLaunchSelf = window.navigator.mozApps.getSelf();
+        requestLaunchSelf.onsuccess = function() {
+            if (requestLaunchSelf.result) {
+                requestLaunchSelf.result.launch();
             }
         };
     }
-}
+};
