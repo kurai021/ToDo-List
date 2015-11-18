@@ -13,7 +13,7 @@ var newItem = [
         year: 0,
         notified: 'no'
     }
-    ];
+];
 
 // all the variables we need for the app
 var taskList = document.getElementById('task-list');
@@ -29,17 +29,18 @@ var year = document.getElementById('deadline-year');
 var priority = document.getElementById('priority');
 
 var submit = document.getElementById('submit');
-var mozL10n = navigator.mozL10n.get;
+var mozL10n = 'mozL10n' in navigator ? navigator.mozL10n.get : function() {};
 
 window.onload = function () {
     'use strict';
+    var idb;
     console.log(mozL10n('AppIni'));
     // In the following line, you should include the prefixes of
     // implementations you want to test.
-    window.indexedDB = window.indexedDB ||
-                       window.mozIndexedDB ||
-                       window.webkitIndexedDB ||
-                       window.msIndexedDB;
+    idb = window.indexedDB ||
+          window.mozIndexedDB ||
+          window.webkitIndexedDB ||
+          window.msIndexedDB;
     // DON'T use 'var indexedDB = ...' if you're not in a function.
     // Moreover, you may need references to some window.IDB* objects:
     window.IDBTransaction = window.IDBTransaction ||
@@ -52,11 +53,11 @@ window.onload = function () {
 
 
     // Let us open our database
-    var request = window.indexedDB.open('toDoList', 4);
+    var request = idb.open('toDoList', 4);
 
     // Gecko-only IndexedDB temp storage option:
-    // var request = window.indexedDB.open('toDoList',
-    //                                    {version: 4, storage: 'temporary'});
+    // var request = idb.open('toDoList',
+    //                        {version: 4, storage: 'temporary'});
 
     // these two event handlers act on the db being opened successfully, or not
     request.onerror = function (event) {
@@ -123,6 +124,7 @@ window.onload = function () {
     };
 
     function displayData() {
+        $('#boot').fadeOut('slow');
         // first clear the content of the task list so
         // that you don't get a huge long list of duplicate stuff each time
         // the display is updated.
