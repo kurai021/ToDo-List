@@ -1,44 +1,42 @@
 $(document).ready(function(){
     'use strict';
-// Drawer Building Blocks control
+    // Drawer Building Blocks control
+    var toHome = document.getElementById('tohome');
+    var toHelp = document.getElementById('tohelp');
+    var toIndex = document.getElementById('toindex');
+    var toTaskList = document.getElementById('totasklist');
+    var aboutApp = document.getElementById('aboutapp');
+    var index = document.getElementById('index');
+    var taskList = document.getElementById('tasklist');
 
-document.querySelector('#tohelp').addEventListener('click', function () {
-    document.querySelector('#aboutapp').className = 'current';
-    document.querySelector('#aboutapp').className = 'skin-dark';
-    document.querySelector('#aboutapp').setAttribute(
-        'data-position', 'current'
-    );
-    document.querySelector('#index').setAttribute('data-position', 'right');
-    document.querySelector('#tasklist').setAttribute('data-position', 'left');
-});
+    toHelp.addEventListener('click', function() {
+        aboutApp.className = 'current skin-dark';
+        aboutApp.setAttribute('data-position', 'current');
+        index.setAttribute('data-position', 'right');
+        taskList.setAttribute('data-position', 'left');
+    });
 
-document.querySelector('#tohome').addEventListener('click', function () {
-    document.querySelector('#aboutapp').className = 'left';
-    document.querySelector('#aboutapp').className = 'skin-dark';
-    document.querySelector('#aboutapp').setAttribute('data-position', 'left');
-    document.querySelector('#index').setAttribute('data-position', 'current');
-    document.querySelector('#tasklist').setAttribute('data-position', 'right');
-});
+    toHome.addEventListener('click', function() {
+        aboutApp.className = 'left skin-dark';
+        aboutApp.setAttribute('data-position', 'left');
+        index.setAttribute('data-position', 'current');
+        taskList.setAttribute('data-position', 'right');
+    });
 
-// Change views
-document.querySelector('#totasklist').addEventListener('click', function () {
-    document.querySelector('#tasklist').className = 'current';
-    document.querySelector('#tasklist').className = 'skin-dark';
-    document.querySelector('#tasklist').setAttribute(
-        'data-position', 'current'
-    );
-    document.querySelector('#index').setAttribute('data-position', 'right');
-    document.querySelector('#aboutapp').setAttribute('data-position', 'right');
-    
-});
+    // Change views
+    toTaskList.addEventListener('click', function() {
+        taskList.className = 'current skin-dark';
+        taskList.setAttribute('data-position', 'current');
+        index.setAttribute('data-position', 'right');
+        aboutApp.setAttribute('data-position', 'right');
+    });
 
-document.querySelector('#toindex').addEventListener('click', function () {
-    document.querySelector('#tasklist').className = 'right';
-    document.querySelector('#tasklist').className = 'skin-dark';
-    document.querySelector('#tasklist').setAttribute('data-position', 'right');
-    document.querySelector('#index').setAttribute('data-position', 'current');
-    document.querySelector('#aboutapp').setAttribute('data-position', 'left');
-});
+    toIndex.addEventListener('click', function() {
+        taskList.className = 'right skin-dark';
+        taskList.setAttribute('data-position', 'right');
+        index.setAttribute('data-position', 'current');
+        aboutApp.setAttribute('data-position', 'left');
+    });
 
 //Google Calendar, Live Calendar and CalDAV support
 //document.querySelector('#registerGoogle').addEventListener(
