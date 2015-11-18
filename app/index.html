@@ -1,19 +1,20 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <title>TODO List</title>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-  <link href="/styles/gaiabb/all.css" rel="stylesheet" type="text/css">
-  <link href="/styles/main.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="components/fontawesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="components/jquery-mentions-input/jquery.mentionsInput.css">
+    <meta charset="utf-8" />
+    <title>TODO List</title>
+    <link href="/styles/gaiabb/all.css" rel="stylesheet" type="text/css">
+    <link href="/styles/main.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="components/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="components/jquery-mentions-input/jquery.mentionsInput.css">
+    <link rel="prefetch" type="application/l10n" href="locales/locales.ini" />
 </head>
 <body role="application">
     <section id="boot">
         <div class="boot-animation text-center">
-           <img src="icons/90x90.png" alt="ToDo List Logo">
-           <h2>ToDo List</h2>
-           <p>Giving order to your tasks</p>
+            <img src="icons/90x90.png" alt="ToDo List Logo">
+            <h2>ToDo List</h2>
+            <p>Giving order to your tasks</p>
             <p>
                 <progress max="100" value="0" class="pack-activity"></progress>
             </p>
@@ -22,162 +23,192 @@
    
     <section id="index" data-position="current">
         <section data-type="sidebar">
-           <header>
-             <menu type="toolbar">
-                 <a href="#"><span class="icon icon-add">add</span></a>
-             </menu>
-             <h1 data-l10n-id="Menu">Menú</h1>
-           </header>
-           <nav class="scrollable">
-             <ul>
-                 <li><a id="tohome" data-l10n-id="HomeBtn" href="#">Inicio<i class="fa fa-home fa-stack-1x"></i></a></li>
-                 <li><a id="tohelp" data-l10n-id="HelpBtn" href="#">Acerca de<i class="fa fa-question-circle fa-stack-1x"></i></a></li>
-             </ul>
-             <h2 data-l10n-id="Contact">Contactame</h2>
-             <ul>
-                 <li><a target="_blank" href="https://www.facebook.com/richard.armuelles">Facebook<i class="fa fa-facebook fa-stack-1x"></i></a></li>
-                 <li><a target="_blank" href="https://twitter.com/raaztux">Twitter<i class="fa fa-twitter fa-stack-1x"></i></a></li>
-                 <li><a target="_blank" href="https://github.com/kurai021">Github<i class="fa fa-github fa-stack-1x"></i></a></li>
-             </ul>
-        </nav>
+            <header>
+                <menu type="toolbar">
+                    <a href="#"><span class="icon icon-add">add</span></a>
+                </menu>
+                <h1 data-l10n-id="Menu">Menú</h1>
+            </header>
+            <nav class="scrollable">
+                <ul>
+                    <li>
+                        <a id="tohome" data-l10n-id="HomeBtn" href="#">
+                            Inicio<i class="fa fa-home fa-stack-1x"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="tohelp" data-l10n-id="HelpBtn" href="#">
+                            Acerca de<i class="fa fa-question-circle fa-stack-1x"></i>
+                        </a>
+                    </li>
+                </ul>
+                <h2 data-l10n-id="Contact">Contactame</h2>
+                <ul>
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/richard.armuelles">
+                            Facebook<i class="fa fa-facebook fa-stack-1x"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="https://twitter.com/raaztux">
+                            Twitter<i class="fa fa-twitter fa-stack-1x"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="https://github.com/kurai021">
+                            Github<i class="fa fa-github fa-stack-1x"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+
+        <section id="drawer" class="skin-dark" role="region">
+            <header>
+                <a href="#content">
+                    <span class="icon icon-menu">hide sidebar</span>
+                </a>
+                <a href="#drawer">
+                    <span class="icon icon-menu">show sidebar</span>
+                </a>
+                <menu>
+                    <a id="totasklist" href="#">
+                        <span class="fa fa-angle-right fa-2x icon-white"></span>
+                    </a>
+                </menu>
+                <h1>ToDo List</h1>
+            </header>
+
+            <header>
+                <h2 data-l10n-id="MakeTask">Crea una Tarea</h2>
+            </header>
+            <div role="main" class="scrollable">
+                <form id="task-form" action="index.html">
+                    <p>
+                        <textarea class="title" id="title" data-l10n-id="NameTask"
+                                  placeholder="Descripción de tarea" required="">
+                        </textarea>
+                    </p>
+                    <p>
+                        <input id="deadline-hours" data-l10n-id="HourTask"
+                               type="number" placeholder="Hora (HH)" required="" />
+                    </p>
+                    <p>
+                        <input id="deadline-minutes" data-l10n-id="MinutesTask"
+                               type="number" placeholder="Minutos (mm)" required="" />
+                    </p>
+                    <br>
+                    <select name="" id="deadline-day" class="button">
+                        <option data-l10n-id="SelectDay" value="">Selecciona un Día</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option> 
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                        <option value="31">31</option>
+                    </select>
+                    <br>
+                    <select name="" id="deadline-month" class="button">
+                        <option data-l10n-id="SelectMonth" value="">Selecciona un Mes</option>
+                        <option value="Enero" data-l10n-id="January">Enero</option>
+                        <option value="Febrero" data-l10n-id="February">Febrero</option>
+                        <option value="Marzo" data-l10n-id="March">Marzo</option>
+                        <option value="Abril" data-l10n-id="April">Abril</option>
+                        <option value="Mayo" data-l10n-id="May">Mayo</option>
+                        <option value="Junio" data-l10n-id="June">Junio</option>
+                        <option value="Julio" data-l10n-id="July">Julio</option>
+                        <option value="Agosto" data-l10n-id="August">Agosto</option>
+                        <option value="Septiembre" data-l10n-id="September">Septiembre</option>
+                        <option value="Octubre" data-l10n-id="October">Octubre</option>
+                        <option value="Noviembre" data-l10n-id="November">Noviembre</option>
+                        <option value="Diciembre" data-l10n-id="December">Diciembre</option>
+                    </select>
+                    <br>
+                    <select name="" id="deadline-year" class="button">
+                        <option data-l10n-id="SelectYear" value="">Selecciona un Año</option>
+                        <option value="2014">2014</option>
+                        <option value="2015">2015</option>
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                    </select>
+                    <select name="" id="priority" class="button">
+                        <option data-l10n-id="PriorityDefault" value="">Selecciona prioridad</option>
+                        <option data-l10n-id="PriorityLow" value="baja">baja</option>
+                        <option data-l10n-id="PriorityMedium" value="media">media</option>
+                        <option data-l10n-id="PriorityHigh" value="alta">alta</option>
+                    </select>
+                    <br>
+                    <button data-l10n-id="RegisterTask" type="submit" id="submit" class="recommend">Registrar Tarea</button>
+                </form>
+            </div>
+        </section>
     </section>
 
-    <section id="drawer" class="skin-dark" role="region">
-        <header>
+    <section id="aboutapp" class="skin-dark" role="region" data-position="left">
+        <header class="fixed">
             <a href="#content"><span class="icon icon-menu">hide sidebar</span></a>
             <a href="#drawer"><span class="icon icon-menu">show sidebar</span></a>
-            <menu>
-                <a id="totasklist" href="#"><span class="fa fa-angle-right fa-2x icon-white"></span></a>
-            </menu>
+            <h1 data-l10n-id="about-h1">Acerca de ToDo List</h1>
+        </header>
+        <div class="text-center" role="main">
+            <img class="img-logo-about" src="icons/90x90.png" alt="ToDo-List icon">
+            <h1>ToDo List</h1>
+            <em>1.0</em>
+            <p data-l10n-id="about-text1">Aplicación para crear lista de tareas con alarma para recordarte cuando debes realizarlas</p>
+            <em data-l10n-id="about-text2">Este software está licenciado bajo la:
+                <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">
+                    <img class="apache-icon" src="icons/apache.png" alt="apache-license">
+                    <p>Apache License 2.0</p>
+                </a>
+            </em> 
+        </div>
+    </section>
+
+    <section id="tasklist" class="skin-dark" role="region" data-position="right">
+        <header>
+            <button id="toindex"><span class="fa fa-angle-left fa-2x icon-white"></span></button>
             <h1>ToDo List</h1>
         </header>
         <header>
-            <h2 data-l10n-id="MakeTask">Crea una Tarea</h2>
+            <h2 data-l10n-id="TaskList">Lista de Tareas</h2>
+            <form id="form-task-search" role="search">
+                <p>
+                <input data-l10n-id="Task-search" id="task-search" type="text" placeholder="Buscar Tarea...">
+                </p>
+            </form>
         </header>
-        <div role="main" class="scrollable">
-            <form id="task-form" action="index.html">
-            <p>
-                <textarea class="title" id="title" data-l10n-id="NameTask" type="text" placeholder="Descripción de tarea" required="" ></textarea>
-            </p>
-            <p>
-                <input id="deadline-hours" data-l10n-id="HourTask" type="number" placeholder="Hora (HH)" required="" />
-            </p>
-            <p>
-                <input id="deadline-minutes" data-l10n-id="MinutesTask" type="number" placeholder="Minutos (mm)" required="" />
-            </p>
-            <br>
-            <select name="" id="deadline-day" class="button">
-                <option data-l10n-id="SelectDay" value="">Selecciona un Día</option>
-                <option value="01">01</option>
-                <option value="02">02</option>
-                <option value="03">03</option>
-                <option value="04">04</option>
-                <option value="05">05</option>
-                <option value="06">06</option>
-                <option value="07">07</option>
-                <option value="08">08</option>
-                <option value="09">09</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option> 
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
-                <option value="21">21</option>
-                <option value="22">22</option>
-                <option value="23">23</option>
-                <option value="24">24</option>
-                <option value="25">25</option>
-                <option value="26">26</option>
-                <option value="27">27</option>
-                <option value="28">28</option>
-                <option value="29">29</option>
-                <option value="30">30</option>
-                <option value="31">31</option>
-            </select>
-            <br>
-            <select name="" id="deadline-month" class="button">
-                <option data-l10n-id="SelectMonth" value="">Selecciona un Mes</option>
-                <option value="Enero" data-l10n-id="January">Enero</option>
-                <option value="Febrero" data-l10n-id="February">Febrero</option>
-                <option value="Marzo" data-l10n-id="March">Marzo</option>
-                <option value="Abril" data-l10n-id="April">Abril</option>
-                <option value="Mayo" data-l10n-id="May">Mayo</option>
-                <option value="Junio" data-l10n-id="June">Junio</option>
-                <option value="Julio" data-l10n-id="July">Julio</option>
-                <option value="Agosto" data-l10n-id="August">Agosto</option>
-                <option value="Septiembre" data-l10n-id="September">Septiembre</option>
-                <option value="Octubre" data-l10n-id="October">Octubre</option>
-                <option value="Noviembre" data-l10n-id="November">Noviembre</option>
-                <option value="Diciembre" data-l10n-id="December">Diciembre</option>
-            </select>
-            <br>
-            <select name="" id="deadline-year" class="button">
-                <option data-l10n-id="SelectYear" value="">Selecciona un Año</option>
-                <option value="2014">2014</option>
-                <option value="2015">2015</option>
-                <option value="2016">2016</option>
-                <option value="2017">2017</option>
-                <option value="2018">2018</option>
-                <option value="2019">2019</option>
-                <option value="2020">2020</option>
-            </select>
-            <select name="" id="priority" class="button">
-                <option data-l10n-id="PriorityDefault" value="">Selecciona prioridad</option>
-                <option data-l10n-id="PriorityLow" value="baja">baja</option>
-                <option data-l10n-id="PriorityMedium" value="media">media</option>
-                <option data-l10n-id="PriorityHigh" value="alta">alta</option>
-            </select>
-            <br>
-            <button data-l10n-id="RegisterTask" type="submit" id="submit" class="recommend">Registrar Tarea</button>
-        </form>
+        <div class="scrollable" id="task" data-type="list">
+            <ul id="task-list" class="list"></ul>
         </div>
     </section>
-</section>
-
-<section id="aboutapp" class="skin-dark" role="region" data-position="left">
-    <header class="fixed">
-        <a href="#content"><span class="icon icon-menu">hide sidebar</span></a>
-        <a href="#drawer"><span class="icon icon-menu">show sidebar</span></a>
-        <h1 data-l10n-id="about-h1">Acerca de ToDo List</h1>
-    </header>
-    <div class="text-center" role="main">
-        <img class="img-logo-about" src="icons/90x90.png" alt="ToDo-List icon">
-        <h1>ToDo List</h1>
-        <em>1.0</em>
-        <p data-l10n-id="about-text1">Aplicación para crear lista de tareas con alarma para recordarte cuando debes realizarlas</p>
-        <em data-l10n-id="about-text2">Este software está licenciado bajo la:
-            <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">
-                <img class="apache-icon" src="icons/apache.png" alt="apache-license">
-                <p>Apache License 2.0</p>
-            </a>
-        </em> 
-    </div>
-</section>
-    
-<section id="tasklist" class="skin-dark" role="region" data-position="right">
-    <header>
-        <button id="toindex"><span class="fa fa-angle-left fa-2x icon-white"></span></button>
-        <h1>ToDo List</h1>
-    </header>
-    <header>
-        <h2 data-l10n-id="TaskList">Lista de Tareas</h2>
-        <form id="form-task-search" role="search">
-            <p>
-               <input data-l10n-id="Task-search" id="task-search" type="text" placeholder="Buscar Tarea...">
-            </p>
-        </form>
-    </header>
-    <div class="scrollable" id="task" data-type="list">
-        <ul id="task-list" class="list"></ul>
-    </div>
-</section>
-</body>
     <script type="text/javascript" src="components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="components/underscore/underscore.js"></script>
     <script type="text/javascript" src="components/jquery-mentions-input/lib/jquery.events.input.js"></script>
@@ -191,5 +222,5 @@
     <script type="text/javascript" defer src="scripts/tag.js"></script>
     <script type="text/javascript" defer src="scripts/taskfilter.js"></script>
     <script type="text/javascript" src="scripts/l10n.js" charset="utf-8"></script>
-    <link rel="prefetch" type="application/l10n" href="locales/locales.ini" />
+</body>
 </html>
