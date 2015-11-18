@@ -82,6 +82,7 @@ window.onload = function () {
     // or a new version number has been submitted via the window.indexedDB.open
     // line above. It is only implemented in recent browsers
     request.onupgradeneeded = function (event) {
+        // Heads up! Shadows global db variable
         var db = event.target.result;
 
         db.onerror = function (event) {
@@ -379,52 +380,65 @@ window.onload = function () {
                 // The JavaScript date object creates month values as a number
                 // between 0 and 11.
 
-                if (monthName === 'January' ||
-                    monthName === 'Enero' ||
-                    monthName === 'Januar') {
-                    monthNumber = 0;
-                } else if (monthName === 'February' ||
-                           monthName === 'Febrero' ||
-                           monthName === 'Februar') {
-                    monthNumber = 1;
-                } else if (monthName === 'March' ||
-                           monthName === 'Marzo' ||
-                           monthName === 'März') {
-                    monthNumber = 2;
-                } else if (monthName === 'April' ||
-                           monthName === 'Abril') {
-                    monthNumber = 3;
-                } else if (monthName === 'May' ||
-                           monthName === 'Mayo' ||
-                           monthName === 'Mai') {
-                    monthNumber = 4;
-                } else if (monthName === 'June' ||
-                           monthName === 'Junio' ||
-                           monthName === 'Juni') {
-                    monthNumber = 5;
-                } else if (monthName === 'July' ||
-                           monthName === 'Julio' ||
-                           monthName === 'Juli') {
-                    monthNumber = 6;
-                } else if (monthName === 'August' ||
-                           monthName === 'Agosto') {
-                    monthNumber = 7;
-                } else if (monthName === 'September' ||
-                           monthName === 'Septiembre') {
-                    monthNumber = 8;
-                } else if (monthName === 'October' ||
-                           monthName === 'Octubre' ||
-                           monthName === 'Oktober') {
-                    monthNumber = 9;
-                } else if (monthName === 'November' ||
-                           monthName === 'Noviembre') {
-                    monthNumber = 10;
-                } else if (monthName === 'December' ||
-                           monthName === 'Diciembre' ||
-                           monthName === 'Dezember') {
-                    monthNumber = 11;
-                } else {
-                    window.alert(mozL10n('IncorrectMonth'));
+                switch (monthName) {
+                    case 'January':
+                    case 'Enero':
+                    case 'Januar':
+                        monthNumber = 0;
+                        break;
+                    case 'February':
+                    case 'Febrero':
+                    case 'Februar':
+                        monthNumber = 1;
+                        break;
+                    case 'March':
+                    case 'Marzo':
+                    case 'März':
+                        monthNumber = 2;
+                        break;
+                    case 'April':
+                    case 'Abril':
+                        monthNumber = 3;
+                        break;
+                    case 'May':
+                    case 'Mayo':
+                    case 'Mai':
+                        monthNumber = 4;
+                        break;
+                    case 'June':
+                    case 'Junio':
+                    case 'Juni':
+                        monthNumber = 5;
+                        break;
+                    case 'July':
+                    case 'Julio':
+                    case 'Juli':
+                        monthNumber = 6;
+                        break;
+                    case 'August':
+                    case 'Agosto':
+                        monthNumber = 7;
+                        break;
+                    case 'September':
+                    case 'Septiembre':
+                        monthNumber = 8;
+                        break;
+                    case 'October':
+                    case 'Octubre':
+                    case 'Oktober':
+                        monthNumber = 9;
+                        break;
+                    case 'November':
+                    case 'Noviembre':
+                        monthNumber = 10;
+                        break;
+                    case 'December':
+                    case 'Diciembre':
+                    case 'Dezember':
+                        monthNumber = 11;
+                        break;
+                    default:
+                        window.alert(mozL10n('IncorrectMonth'));
                 }
 
                 // check if the current hours, minutes, day, month and year
