@@ -131,6 +131,61 @@ window.onload = function () {
         // the display is updated.
         taskList.innerHTML = '';
 
+        var getSuffix = function(day) {
+            var daySuffix;
+            // check which suffix the deadline day of the month needs
+            if (day === 1 || day === 21 || day === 31) {
+                daySuffix = 'st';
+            } else if (day === 2 || day === 22) {
+                daySuffix = 'nd';
+            } else if (day === 3 || day === 23) {
+                daySuffix = 'rd';
+            } else {
+                daySuffix = 'th';
+            }
+            return daySuffix;
+        };
+
+        var buildListItem = function(cursor) {
+            var listItem = document.createElement('li');
+            var priority = cursor.value.priority;
+            var notified = cursor.value.notified;
+
+            // build the to-do list entry and put it into the list item
+            listItem.innerHTML = '<p class="tasktitle">' +
+                                 cursor.value.taskTitle + '</p>' +
+                                 '<p>' + cursor.value.hours + ':' +
+                                 cursor.value.minutes + ', ' +
+                                 cursor.value.month + ' ' +
+                                 cursor.value.day+getSuffix(cursor.value.day) +
+                                 ' ' + cursor.value.year + '.' + '</p>';
+
+            if((priority === 'baja') && (notified === 'no')){
+                listItem.style.borderLeft = '5px solid green';
+            }
+            else if((priority === 'media') && (notified === 'no')){
+                listItem.style.borderLeft = '5px solid yellow';
+            }
+            else if((priority === 'alta') && (notified === 'no')){
+                listItem.style.borderLeft = '5px solid red';
+            }
+            else {
+                listItem.style.borderLeft = '5px solid gray';
+                listItem.setAttribute('aria-disabled', 'true');
+            }
+
+            var hashTagRE = /(^|\W)(#[a-z_\d][\w-ñ&]*)/ig;
+            var eventRE = /(^|\W)(![a-z_\d][\w-ñ&]*)/ig;
+            var contactRE = /(^|\W)(@[a-z_\d][\w-ñ& ]*)/ig;
+            listItem.innerHTML = listItem.innerHTML.replace(hashTagRE,
+                                 '$1<span class="hashtag-text">$2</span>');
+            listItem.innerHTML = listItem.innerHTML.replace(eventRE,
+                                 '$1<span class="event-text">$2</span>');
+            listItem.innerHTML = listItem.innerHTML.replace(contactRE,
+                                 '$1<span class="contact-text">$2</span>');
+            return listItem;
+        };
+
         // Open our object store and then get a cursor list of all the different
         // data items in the IDB to iterate through
         var objectStore = db.transaction('toDoList').objectStore('toDoList');
@@ -140,57 +195,10 @@ window.onload = function () {
             if (cursor) {
                 // create a list item to put each data item inside
                 // when displaying it
-                var listItem = document.createElement('li');
-                var daySuffix;
                 var day = cursor.value.day;
-                var priority = cursor.value.priority;
-                var notifed = cursor.value.notified;
-
-                // check which suffix the deadline day of the month needs
-                if (day === 1 || day === 21 || day === 31) {
-                    daySuffix = 'st';
-                } else if (day === 2 || day === 22) {
-                    daySuffix = 'nd';
-                } else if (day === 3 || day === 23) {
-                    daySuffix = 'rd';
-                } else {
-                    daySuffix = 'th';
-                }
-
+                var daySuffix = getSuffix(day);
+                var listItem = buildListItem(cursor);
                 listItem.setAttribute('class', 'listitem');
-
-                // build the to-do list entry and put it into the list item
-                listItem.innerHTML = '<p class="tasktitle">' +
-                                     cursor.value.taskTitle + '</p>' +
-                                     '<p>' + cursor.value.hours + ':' +
-                                     cursor.value.minutes + ', ' +
-                                     cursor.value.month + ' ' +
-                                     cursor.value.day + daySuffix + ' ' +
-                                     cursor.value.year + '.' + '</p>';
-
-                if((priority === 'baja') && (notified === 'no')){
-                    listItem.style.borderLeft = '5px solid green';
-                }
-                else if((priority === 'media') && (notified === 'no')){
-                    listItem.style.borderLeft = '5px solid yellow';
-                }
-                else if((priority === 'alta') && (notified === 'no')){
-                    listItem.style.borderLeft = '5px solid red';
-                }
-                else {
-                    listItem.style.borderLeft = '5px solid gray';
-                    listItem.setAttribute('aria-disabled', 'true');
-                }
-
-                var hashTagRE = /(^|\W)(#[a-z_\d][\w-ñ&]*)/ig;
-                var eventRE = /(^|\W)(![a-z_\d][\w-ñ&]*)/ig;
-                var contactRE = /(^|\W)(@[a-z_\d][\w-ñ& ]*)/ig;
-                listItem.innerHTML = listItem.innerHTML.replace(hashTagRE,
-                                     '$1<span class="hashtag-text">$2</span>');
-                listItem.innerHTML = listItem.innerHTML.replace(eventRE,
-                                     '$1<span class="event-text">$2</span>');
-                listItem.innerHTML = listItem.innerHTML.replace(contactRE,
-                                     '$1<span class="contact-text">$2</span>');
 
                 // put the item item inside the task list
                 taskList.appendChild(listItem);
@@ -220,10 +228,6 @@ window.onload = function () {
             }
         };
     }
-
-    // give the form submit button an event listener so that
-    // when the form is submitted the addData() function is run
-    taskForm.addEventListener('submit', addData, false);
 
     function addData(e) {
         // we don't want the form to submit in the conventional way
@@ -325,6 +329,10 @@ window.onload = function () {
         // by running displayData() again.
         displayData();
     }
+
+    // give the form submit button an event listener so that
+    // when the form is submitted the addData() function is run
+    taskForm.addEventListener('submit', addData, false);
 
     function deleteItem(event) {
         // retrieve the name of the task we want to delete
@@ -485,41 +493,44 @@ window.onload = function () {
             console.log(mozL10n('NoNotifications'));
         }
         // Let's check if the user is okay to get some notification
-        else if (Notification.permission === 'granted') {
-            // If it's okay let's create a notification
-            var img = 'https://dl.dropboxusercontent.com/u/56345835/' +
-                      '128x128.png';
-            var text = mozL10n('HourOf') + ' ' + '"' + title + '"';
-            var notification = new Notification('To do list', {
-                body: text,
-                icon: img
-            });
-            window.navigator.vibrate(2000);
-            audio.play();
-        }
-        // Otherwise, we need to ask the user for permission
-        // Note, Chrome does not implement the permission static property
-        // So we have to check for NOT 'denied' instead of 'default'
-        else if (Notification.permission !== 'denied') {
-            Notification.requestPermission(function (permission) {
-                // Whatever the user answers,
-                // we make sure Chrome stores the information
-                if (!('permission' in Notification)) {
-                    Notification.permission = permission;
-                }
-                // If the user is okay, let's create a notification
-                if (permission === 'granted') {
-                    var img = 'https://dl.dropboxusercontent.com/u/56345835/' +
-                              '128x128.png';
-                    var text = mozL10n('HourOf') + ' ' + '"' + title + '"';
-                    var notification = new Notification('To do list', {
-                        body: text,
-                        icon: img
-                    });
-                    window.navigator.vibrate(2000);
-                    audio.play();
-                }
-            });
+        else {
+            var Notification = window.Notification;
+            if (Notification.permission === 'granted') {
+                // If it's okay let's create a notification
+                var img = 'https://dl.dropboxusercontent.com/u/56345835/' +
+                          '128x128.png';
+                var text = mozL10n('HourOf') + ' ' + '"' + title + '"';
+                var notification = new Notification('To do list', {
+                    body: text,
+                    icon: img
+                });
+                window.navigator.vibrate(2000);
+                audio.play();
+            }
+            // Otherwise, we need to ask the user for permission
+            // Note, Chrome does not implement the permission static property
+            // So we have to check for NOT 'denied' instead of 'default'
+            else if (Notification.permission !== 'denied') {
+                Notification.requestPermission(function (permission) {
+                    // Whatever the user answers,
+                    // we make sure Chrome stores the information
+                    if (!('permission' in Notification)) {
+                        Notification.permission = permission;
+                    }
+                    // If the user is okay, let's create a notification
+                    if (permission === 'granted') {
+                        var img = 'https://dl.dropboxusercontent.com/' + 
+                                  'u/56345835/128x128.png';
+                        var text = mozL10n('HourOf') + ' ' + '"' + title + '"';
+                        var notification = new Notification('To do list', {
+                            body: text,
+                            icon: img
+                        });
+                        window.navigator.vibrate(2000);
+                        audio.play();
+                    }
+                });
+            }
         }
         // At last, if the user already denied any notification, and you
         // want to be respectful there is no need to bother him any more.
