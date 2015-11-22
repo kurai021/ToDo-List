@@ -2,17 +2,44 @@
 <html>
 <head>
   <title>Mocha tests</title>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="/lib/mocha.css">
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="/lib/mocha/mocha.css" />
+  <style>
+  /* Move out of viewport */
+  #boilerplate * {
+    display: hidden;
+    position: absolute;
+    top: -99999;
+    left: -99999;
+  }
+  </style>
 
   <!-- include mocha + chai + sinon -->
-  <script src="/lib/mocha.js" type="text/javascript"></script>
-  <script src="/lib/chai.js" type="text/javascript"></script>
-  <script src="/lib/sinon.js" type="text/javascript"></script>
+  <script src="/lib/mocha/mocha.js" type="text/javascript"></script>
+  <script src="/lib/chai/chai.js" type="text/javascript"></script>
+  <script src="/lib/sinon-chai/lib/sinon-chai.js" type="text/javascript"></script>
+  <script src="/lib/sinonjs/sinon.js" type="text/javascript"></script>
 </head>
 <body>
+  <div id="boilerplate">
+      <div id='tohome'></div>
+      <div id='tohelp'></div>
+      <div id='toindex'></div>
+      <div id='totasklist'></div>
+      <div id='aboutapp'></div>
+      <div id='index'></div>
+      <div id='tasklist'></div>
+  </div>
   <!-- required for browser reporter -->
   <div id="mocha"></div>
+
+  <!-- 3rd party libs used in scripts -->
+  <script type="text/javascript" src="/components/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/components/underscore/underscore.js"></script>
+  <script type="text/javascript" src="/components/jquery-mentions-input/lib/jquery.events.input.js"></script>
+  <script type="text/javascript" src="/components/jquery-mentions-input/lib/jquery.elastic.js"></script>
+  <script type="text/javascript" src="/components/jquery-mentions-input/jquery.mentionsInput.js"></script>
+  <script type="text/javascript" src="/components/jquery-searcher/dist/jquery.searcher.min.js"></script>
 
   <script type="text/javascript">
     mocha.setup('bdd');
@@ -22,15 +49,18 @@
   </script>
 
   <!-- include the sources we want to test -->
+  <script type="text/javascript" src="/scripts/boot.js"></script>
+  <script type="text/javascript" src="/scripts/drawer.js"></script>
+  <!-- Fails over idb.open()
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  -->
+  <script type="text/javascript" src="/scripts/reopen.js"></script>
+  <script type="text/javascript" src="/scripts/tag.js"></script>
+  <script type="text/javascript" src="/scripts/taskfilter.js"></script>
 
   <!-- include the spec files -->
-  <script type="text/javascript">
-    describe('sample test', function () {
-      it('just works', function () {
-        chai.expect(2 + 2).to.equal(4);
-      });
-    });
-  </script>
+  <script type="text/javascript" src="specs/boot.test.js"></script>
+  <script type="text/javascript" src="specs/drawer.test.js"></script>
 
   <!-- run mocha -->
   <script type="text/javascript">
@@ -38,4 +68,3 @@
   </script>
 </body>
 </html>
-
