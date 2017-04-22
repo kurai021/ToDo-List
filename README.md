@@ -175,7 +175,7 @@ in `app/.tmp`.
 
 ### Run tests
 
-Test use [Mocha](http://visionmedia.github.io/mocha/) as spec-based
+Test use [Mocha](http://mochajs.org/) as spec-based
 framework, [Sinon](http://www.sinonjs.org) to create mocks and stubs,
 and [Chai](http://www.chaijs.com/) for the expectations.
 
